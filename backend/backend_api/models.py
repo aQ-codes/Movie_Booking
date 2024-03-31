@@ -1,15 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# users who book tickets
+#users who book tickets
 class Customer(models.Model):
-    name = models.CharField(max_length = 200, null = True) 
-    phone = models.CharField(max_length = 200,null = True)
-    email = models.CharField(max_length = 200, null = True)
-    date_created = models.DateTimeField(auto_now_add = True, null =True)  
-
+    # name = models.CharField(max_length = 200, null = True) 
+    # phone = models.CharField(max_length = 200,null = True)
+    # email = models.CharField(max_length = 200, null = True)
+    # date_created = models.DateTimeField(auto_now_add = True, null =True)  
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    mobile=models.PositiveBigIntegerField()
+    
     def __str__(self):  
-        return self.name
+         return self.user.username
+    
     
     
 class Movie(models.Model):
@@ -61,7 +64,7 @@ class Show(models.Model):
 
 
     def __str__(self):  
-        return self.name
+        return self.movie.title
 
 
 class Booking(models.Model):
