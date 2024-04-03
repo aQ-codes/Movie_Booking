@@ -17,17 +17,17 @@ class Customer(models.Model):
     
 class Movie(models.Model):
     STATUS = (
-        ('upcoming', 'upcoming'),
-        ('running', 'running'),
-        ('paused', 'paused'),
-        ('completed', 'completed')
+        ('Upcoming', 'Upcoming'),
+        ('Running', 'Running'),
+        ('Paused', 'Paused'),
+        ('Completed', 'Completed')
         )
     title = models.CharField(max_length = 200, null = True)
     language = models.CharField(max_length = 200, null = True)
     description = models.TextField(max_length = 200, null = True, blank = True)
     duration = models.IntegerField (null = True)   # time in minutes
-    status = models.CharField(max_length = 200, null = True, choices = STATUS)
-    poster = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, blank=True, null = True)
+    status = models.CharField(max_length = 200, null = True, choices = STATUS,default='Upcoming')
+    poster = models.ImageField(upload_to='upload/images', height_field=None, width_field=None, max_length=100, blank=True, null = True)
 
     def __str__(self):  
         return self.title
@@ -40,12 +40,12 @@ class ShowTime(models.Model):
         return self.time
     
 
-class ShowDay(models.Model):
-    day = models.CharField(max_length = 200, blank=False, null = False)
-    date = models.CharField(max_length = 200, blank=False, null = False)
+# class ShowDay(models.Model):
+#     day = models.CharField(max_length = 200, blank=False, null = False)
+#     date = models.CharField(max_length = 200, blank=False, null = False)
 
-    def __str__(self):  
-        return self.date
+#     def __str__(self):  
+#         return self.date
 
 
 class Screen(models.Model):
@@ -56,11 +56,16 @@ class Screen(models.Model):
     
 
 class Show(models.Model):
+    SHOW_STATUS = (
+        ('disabled', 'disabled'),
+        ('enabled', 'enabled'),
+        )
     movie = models.ForeignKey(Movie, null=True, on_delete=models.SET_NULL)
-    date = models.ForeignKey(ShowDay, null=True, on_delete=models.SET_NULL)
+    # date = models.ForeignKey(ShowDay, null=True, on_delete=models.SET_NULL)
     time = models.ForeignKey(ShowTime, null=True, on_delete=models.SET_NULL)
     screen = models.ForeignKey(Screen, null=True, on_delete=models.SET_NULL)
-
+    status = models.CharField(max_length = 200, null = True, choices = SHOW_STATUS, default='enabled')
+ 
 
 
     def __str__(self):  
@@ -85,3 +90,7 @@ class Ticket(models.Model):
     seat_id = models.IntegerField (null = True)
     seat_count = models.IntegerField (null = True)
     price = models.FloatField(null=True)
+
+    
+    def __str__(self):  
+        return self.bk_id

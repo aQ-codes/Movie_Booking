@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'backend_api',
+
+
+
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken' 
 
@@ -48,6 +53,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+     "corsheaders.middleware.CorsMiddleware",    #new
+    "django.middleware.common.CommonMiddleware", #new must be above common middleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -142,7 +149,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images') #new #for  adding images to
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
+REST_FRAMEWORK = { #new
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
@@ -157,3 +164,9 @@ REST_FRAMEWORK = {
 
 }
 
+
+
+CORS_ALLOWED_ORIGINS = [ #new
+    "http://localhost:3000",
+    
+]

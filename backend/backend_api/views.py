@@ -54,7 +54,7 @@ def login(request):
 
 
 
-@api_view(["GET"])
+@api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def customers(request):     
     customers = Customer.objects.all()  
@@ -71,36 +71,99 @@ def customer(request, pk):
     return Response(serializer.data)      
 
 
-@api_view(["GET"])
+@api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def list_movies(request):     
-    movies = Movie.objects.all()  
-    serializer = MovieSerializer(movies, many = True)
+
+    if request.method == 'GET':
+        movies = Movie.objects.all()  
+        serializer = MovieSerializer(movies, many = True)
+        return Response(serializer.data)          
     
-    return Response(serializer.data)          
+    if request.method == 'POST':
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response('Successfull created')
+        else:
+            return Response(serializer.errors)
+
+
+
+  
  
- 
-@api_view(['GET'])
+@api_view(['GET','PUT','DELETE'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
 @permission_classes((AllowAny,))
 def movie_detail(request, pk):
     # product = get_object_or_404(, pk=pk)
     movie = Movie.objects.get(id=pk)
-    serializer = MovieSerializer(movie)
 
-    return Response(serializer.data)
+    if request.method == 'GET':
+        # movie = Movie.objects.get(id=pk)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+
+
+    if request.method == 'PUT':
+        serializer = MovieSerializer(movie,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response('Successfully updated')
+        else:
+            return Response(serializer.errors)
+        
+    if request.method == 'DELETE':
+        
+            movie.delete()
+            return Response("deleted successfully")
 
 
 
-    
+     
 @api_view(["GET"])
 @permission_classes((AllowAny,))
-def list_shows(request):     
-    shows = Show.objects.all()  
-    serializer = ShowSerializer(shows, many = True)
+def list_screens(request):     
+    screens =Screen.objects.all()  
+    serializer = ScreenSerializer(screens, many = True)
     
-    return Response(serializer.data)  
+    return Response(serializer.data)     
+
+
+@api_view(["GET"])
+@permission_classes((AllowAny,))
+def list_showtimes(request):     
+    showtime = ShowTime.objects.all()  
+    serializer =ShowTimeSerializer(showtime, many = True)
+    
+    return Response(serializer.data)     
+
+
+
+
+@api_view(["GET",'POST'])
+@permission_classes((AllowAny,))
+def list_shows(request):     
+    if request.method == 'GET':
+        shows = Show.objects.all()  
+        serializer = ShowSerializer(shows, many = True)
+        
+        return Response(serializer.data)
+    
+    if request.method == 'POST':
+
+        serializer = ShowSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response('Successfull created')
+        else:
+            return Response(serializer.errors)
+
+
+
+
+
 
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
@@ -124,6 +187,8 @@ def list_bookings(request):
     
     return Response(serializer.data)  
 
+
+
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -146,6 +211,7 @@ def list_tickets(request):
     
     return Response(serializer.data)  
 
+
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -156,6 +222,10 @@ def ticket_detail(request, pk):
     serializer = TicketSerializer(ticket)
 
     return Response(serializer.data)
+
+
+
+
 # @api_view(['POST'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])

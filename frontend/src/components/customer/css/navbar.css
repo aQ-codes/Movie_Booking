@@ -1,0 +1,31 @@
+.NAVBOY{
+
+    /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(1,15,7,1) 50%, rgba(10,142,114,1) 100%);
+     */
+
+/* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(3,24,28,1) 50%, rgba(90,4,94,1) 100%); */
+
+background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(14,90,153,1) 100%); 
+
+/* background:white */
+}
+
+.ourlogo{
+   color: rgb(224, 15, 15);
+}
+
+.navboy-item{
+    color: rgb(238, 238, 238);
+   
+}
+
+.navboy-title{
+    font-weight: 700;
+    font-size: larger;
+    color: rgb(35, 87, 185);
+}
+
+.navboy-item-link :hover{
+    color: aqua;
+}
