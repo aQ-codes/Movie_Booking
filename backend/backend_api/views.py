@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate , logout
 from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_exempt
 
@@ -13,10 +13,11 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter, OrderingFilter
 
+from django.http import JsonResponse
+
  # from med.forms import MedicineForm
 from .serializers import *
 from .models import *
-
 
 
 
@@ -33,7 +34,7 @@ def signup(request):
 
 
 
-#send as form data 
+# send as form data 
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -49,7 +50,7 @@ def login(request):
                         status=HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
     return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
-
+ 
 
 
 
@@ -71,6 +72,71 @@ def customer(request, pk):
     return Response(serializer.data)      
 
 
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def customer_login(request):  
+    #  msg = {
+    #      'bool':True,
+    #      'post':request.data.get('email')
+
+    #  }
+    #  return Response(msg)
+
+     username = request.data.get("email")
+     password = request.data.get("password")
+     user = authenticate(username=username, password=password)
+     if user:
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key, 'user_id': user.id , 'email': user.username})
+     
+     return Response({'error': 'Invalid Email or Password !!'})
+
+ 
+    # if user:
+    #      return Response({'success': 'right credentials'},
+    #                     status=HTTP_404_NOT_FOUND)
+    # if not user:
+    #     return Response({'error': 'Invalid Credentials'},
+    #                     status=HTTP_404_NOT_FOUND)
+
+    # 
+    # return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def customer_logout(request):
+    logout(request)
+    return Response({'bool':True,'message':'logout successfully'})    
+
+    
+
+
+
+
+
+# @csrf_exempt
+# @api_view(["POST"])
+# @permission_classes((AllowAny,))
+# def customer_login(request):
+#     username = request.data.get("email")
+#     password = request.data.get("password")
+#     if username is None or password is None:
+#         return Response({'error': 'Please provide both username and password'},
+#                         status=HTTP_400_BAD_REQUEST)
+#     user = authenticate(username=username, password=password)
+#     if not user:
+#         return Response({'error': 'Invalid Credentials'},
+#                         status=HTTP_404_NOT_FOUND)
+#     token, _ = Token.objects.get_or_create(user=user)
+#     return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
+
+
+
+
+
+
+
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def list_movies(request):     
@@ -87,6 +153,7 @@ def list_movies(request):
             return Response('Successfull created')
         else:
             return Response(serializer.errors)
+        
 
 
 
@@ -147,7 +214,7 @@ def list_showtimes(request):
 def list_shows(request):     
     if request.method == 'GET':
         shows = Show.objects.all()  
-        serializer = ShowSerializer(shows, many = True)
+        serializer = ShowSerializer2(shows, many = True)
         
         return Response(serializer.data)
     
@@ -162,9 +229,6 @@ def list_shows(request):
 
 
 
-
-
-
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -175,6 +239,32 @@ def show_detail(request, pk):
     serializer = ShowSerializer(show)
 
     return Response(serializer.data)
+
+
+
+
+@api_view(["GET",'POST'])
+@permission_classes((AllowAny,))
+def list_shows2(request):     
+    if request.method == 'GET':
+        shows = Show.objects.all()  
+        serializer = ShowSerializer2(shows, many = True)
+        
+        return Response(serializer.data)
+
+
+
+
+@api_view(['GET'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+@permission_classes((AllowAny,))
+def show_detail2(request, pk):
+    # product = get_object_or_404(, pk=pk)
+    movie = Movie.objects.get(id=pk)
+    shows = movie.show_set.all()
+    serializer = ShowSerializer2(shows,  many = True)
+    return Response(serializer.data)   
 
 
 
@@ -203,6 +293,33 @@ def booking_detail(request, pk):
 
 
 
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def booking_temp(request):     
+
+    if request.method == 'GET':
+       return Response('entered successfully')
+
+    #     # movies = Movie.objects.all()  
+    #     # serializer = MovieSerializer(movies, many = True)
+    #     # return Response(serializer.data)          
+    
+    if request.method == 'POST':
+        serializer =BookingTempSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response('valid serializer')
+    #         return Response('Successfull created')
+    #     else:
+    #         return Response(serializer.errors)
+        return Response('entered successfully')
+
+
+
+
+
+
+
 @api_view(["GET"])
 @permission_classes((AllowAny,))
 def list_tickets(request):     
@@ -226,6 +343,15 @@ def ticket_detail(request, pk):
 
 
 
+
+
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def list_running(request):       
+   
+   movies = Movie.objects.filter(status__iexact='running') 
+   serializer = MovieSerializer(movies, many = True)
+   return Response(serializer.data)     
 # @api_view(['POST'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])

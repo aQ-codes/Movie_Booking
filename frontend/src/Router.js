@@ -8,13 +8,26 @@ import MovieDetail from "./components/admin/pages/MovieDetail";
 import EditMovieDetail from "./components/admin/pages/EditMovieDetail"
 import AddShowPage from "./components/admin/pages/AddShowPage";
 import Home from "./components/customer/pages/Home";
+import SelectShow from "./components/customer/SelectShow";
+import CustomerLogin from "./components/customer/CustomerLogin";
+import CustomerRegister from "./components/customer/CustomerRegister";
+import AdminHome from "./components/admin/AdminHome";
+import HomePageAdmin from "./components/admin/pages/HomePageAdmin";
 
 const router = createBrowserRouter([
     { path: '', element: <App/> },
     { path: 'home', element: <Home/> },
+    { path: 'register', element: <CustomerRegister/> },
+    { path: 'login', element: <CustomerLogin/> },
+    { path: 'select/:movId', element: <SelectShow/> },
     
 
     // admin routes
+
+
+    { path: 'admin/', element: <HomePageAdmin/> },
+    { path: 'admin/login', element: <Dashboard/> },
+
     { path: 'admin/dashboard', element: <Dashboard/> },
               //movies
     { path: 'admin/movies', element: <Movies/> },

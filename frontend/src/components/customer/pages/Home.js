@@ -5,7 +5,7 @@ import '../css/Layout.css';
 
 function Home() {
   return (
-    <div >
+    <div className='body-2'>
     <Navbar/>
     <ListShows/>
     </div>
@@ -14,3 +14,4 @@ function Home() {
 
 export default Home
         // <section style={{"background-color": "#eee"}}>
+

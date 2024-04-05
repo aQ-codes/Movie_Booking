@@ -21,10 +21,10 @@ class ShowTimeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# class ShowDaySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = ShowDay
-#         fields = '__all__'
+class ShowDaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShowDay
+        fields = '__all__'
 
 class ScreenSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,12 +37,28 @@ class ShowSerializer(serializers.ModelSerializer):
         model = Show
         fields = '__all__'
 
-
+class ShowSerializer2(serializers.ModelSerializer):
+    movie=MovieSerializer()
+    date=ShowDaySerializer()
+    time=ShowTimeSerializer()
+    screen=ScreenSerializer()
+    class Meta:
+        model = Show
+        fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = '__all__'
+
+
+class BookingTempSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookingTemp
+        fields = '__all__'
+
+
+
 
 
 class TicketSerializer(serializers.ModelSerializer):

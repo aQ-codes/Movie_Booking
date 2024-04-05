@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
 
 
-.aniplex-home{
-    background: rgb(0,8,8);
-background: linear-gradient(90deg, rgba(0,8,8,1) 0%, rgba(14,25,65,1) 35%, rgba(4,14,16,1) 100%);
-}
 
 
 /* .show-card{
@@ -13,20 +9,25 @@ background: linear-gradient(90deg, rgba(0,8,8,1) 0%, rgba(57,14,65,1) 35%, rgba(
 }*/
 
 
-
-
-
 *{
   box-sizing: border-box;
   margin: 0;
 }
 
+
 html, body{
   margin: 0;
-  background: black;
+   background: black;
+   
+
+
+
   font-family: 'Montserrat', helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
+/* 
+  background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(5,4,64,1) 43%, rgba(44,4,52,1) 100%); */
 }
 
 .movie_card{

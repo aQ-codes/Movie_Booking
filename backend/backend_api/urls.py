@@ -8,6 +8,8 @@ urlpatterns = [
 
     path('customers/', views.customers, name="get-all-customers"),
     path('customer/<int:pk>', views.customer, name="get-customer"),
+    path('customer/login/', views.customer_login, name="customer"),
+    path('customer/logout/', views.customer_logout, name="customer"),
 
 
     path('movies/', views.list_movies, name="get-all-movies"),
@@ -21,9 +23,18 @@ urlpatterns = [
 
     path('shows/', views.list_shows, name="get-all-shows"),
     path('shows/<int:pk>', views.show_detail, name="get-show"),
+    path('shows2/', views.list_shows2, name="get-all-shows"),
+    path('shows2/<int:pk>', views.show_detail2, name="get-all-shows"),
+
+
+
+
+    path('booking/temp/', views.booking_temp, name="book-temp"),
 
     path('bookings/', views.list_bookings, name="get-all-bookings"),
     path('bookings/<int:pk>', views.booking_detail, name="get-booking"),
+
+
 
     path('tickets/', views.list_tickets, name="get-all-tickets"),
     path('tickets/<int:pk>', views.ticket_detail, name="get-ticket"),
@@ -32,7 +43,7 @@ urlpatterns = [
     # path('update/<int:pk>', views.update, name="api-edit"),
     # path('delete/<int:pk>', views.delete, name="api-delete"),
     # path('list/', views.list, name="api-list"),
-    
+    path('running/', views.list_running, name="get-running"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) 

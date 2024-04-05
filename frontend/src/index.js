@@ -4,8 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-// import { Provider } from "react-redux";
-// import store from "./store/store";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 import { RouterProvider } from 'react-router-dom';
 import Router from './Router';
@@ -14,11 +14,11 @@ import Router from './Router';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
     {/* <AutoLogin> */}
       <RouterProvider router={Router}/>
       {/* </AutoLogin> */}
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>,
 );
 

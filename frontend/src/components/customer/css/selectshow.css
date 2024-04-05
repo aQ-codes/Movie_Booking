@@ -1,0 +1,40 @@
+
+.show-main{
+    background-color: #1306ca;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  height: 95vh;
+
+}
+
+.seat-page{
+    /* margin-left:100px; */
+     padding: 50px;
+     padding-top:25px;
+     background-color: #242333;
+     color: white;
+     align-items: center;
+     justify-content: center;
+   
+     font-family: 'Lato', 'sans-serif';
+}
+.show-page {
+  /* background-color: red; */
+  background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(14,90,153,1) 100%); 
+}
+
+.seat {
+    background-color: #444451;
+    height: 30px;
+    width: 30px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .row {
+    display: flex;
+  }
+  

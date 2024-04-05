@@ -1,10 +1,30 @@
+/* .loginsignup-page{
+    background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(14,90,153,1) 100%); 
+} */
+
+.loginsignup-page{
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(14,90,153,1) 100%); 
+    height:100vh;
+    padding-top: 50px;
+
+ 
+    
+}
+
+
 .loginsignup-container{
     display : flex; 
     flex-direction: column;
     background: rgb(233, 206, 206);
-    margin-top: 200px;
+    margin-top: 10px;
     padding-bottom: 30px;
     width: 600px;
+    /* height:600px; */
+    margin-top: 90px;
+
+    
   
 }
 
@@ -17,15 +37,15 @@
     margin-top: 30px;
 }
 
-.text{
-    font-size: 50px;
+.heading{
+    font-size: 30px;
     font-weight: 700;
     color:#3c009d;
 }
 
 .underline{
-    width:80px;
-    height:9px;
+    width:70px;
+    height:7px;
     background-color: #3c009d;
     border-radius: 10px;
 }
@@ -33,8 +53,8 @@
 .inputs{
     display : flex; 
     flex-direction: column;
-    gap: 25px;
-    margin-top: 55px;
+    gap: 15px;
+    margin-top: 35px;
 
 }
 
@@ -44,7 +64,7 @@
     background: #eaeaea;
     margin:auto;
     width:480px;
-    height:80px;
+    height:50px;
     border-radius: 10px;
 }
 
@@ -67,8 +87,8 @@
 .forget-password{
     padding-left: 62px;
     color:#797979;
-    margin-top: 27px;
-    font-size:18px;
+    margin-top: 10px;
+    /* font-size:18px; */
 }
 
 .forget-password span{
@@ -81,11 +101,9 @@
 .submit-container{
     display: flex;
     gap: 30px;
-    /* margin-top: 27px; */
-    margin: 30px auto;
+    margin: 5px auto;
 
-}
-
+} 
 .submit{
     display: flex;
     background-color: #4c00b4;
@@ -98,9 +116,12 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+} 
+
+.form-error{
+    padding-left: 55px;
+    font-weight: bold;
+    margin-bottom: 5px;
+
 }
 
-.gray{
-    background-color: #EAEAEA;
-    color:#676767
-}

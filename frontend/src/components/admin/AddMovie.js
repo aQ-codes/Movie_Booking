@@ -51,15 +51,15 @@ const fileHandler = (event) => {
     axios.post('http://127.0.0.1:8000/api/movies/',formdata
  ).then(response=>{
   console.log(response.data)
-  //  if(response.data==201){
-  //   // setErrorMsg(response.statusText)
-  //   // setSuccessMsg('')
-  //  }
-  //  else{
-  //   setErrorMsg('')
-  //   setSuccessMsg(response.statusText)
+   if(response.data==201){
+    setErrorMsg(response.statusText)
+    setSuccessMsg('')
+   }
+   else{
+    setErrorMsg('')
+    setSuccessMsg(response.statusText)
 
-  //  }
+   }
   }) // navigate('/medicines')
   .catch(error=>{
     if(error.response.data.errors){

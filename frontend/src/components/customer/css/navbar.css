@@ -22,8 +22,10 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(1
 
 .navboy-title{
     font-weight: 700;
-    font-size: larger;
+    font-size: 18px;
+    font-style: italic;
     color: rgb(35, 87, 185);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .navboy-item-link :hover{

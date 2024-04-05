@@ -8,7 +8,9 @@ class Customer(models.Model):
     # email = models.CharField(max_length = 200, null = True)
     # date_created = models.DateTimeField(auto_now_add = True, null =True)  
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    mobile=models.PositiveBigIntegerField()
+    # mobile=models.PositiveBigIntegerField()
+    email = models.CharField(max_length = 200, null = True)
+
     
     def __str__(self):  
          return self.user.username
@@ -40,12 +42,12 @@ class ShowTime(models.Model):
         return self.time
     
 
-# class ShowDay(models.Model):
-#     day = models.CharField(max_length = 200, blank=False, null = False)
-#     date = models.CharField(max_length = 200, blank=False, null = False)
+class ShowDay(models.Model):
 
-#     def __str__(self):  
-#         return self.date
+    date = models.CharField(max_length = 200, blank=False, null = False)
+
+    def __str__(self):  
+        return self.date
 
 
 class Screen(models.Model):
@@ -61,7 +63,7 @@ class Show(models.Model):
         ('enabled', 'enabled'),
         )
     movie = models.ForeignKey(Movie, null=True, on_delete=models.SET_NULL)
-    # date = models.ForeignKey(ShowDay, null=True, on_delete=models.SET_NULL)
+    date = models.ForeignKey(ShowDay, null=True, on_delete=models.SET_NULL)
     time = models.ForeignKey(ShowTime, null=True, on_delete=models.SET_NULL)
     screen = models.ForeignKey(Screen, null=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length = 200, null = True, choices = SHOW_STATUS, default='enabled')
@@ -82,6 +84,22 @@ class Booking(models.Model):
 
     def __str__(self):  
         return self.bk_id
+    
+
+
+
+class BookingTemp(models.Model):
+    bk_id = models.CharField(max_length = 200, blank=False, null = False)
+    show = models.ForeignKey(Show, null=True, on_delete=models.SET_NULL)
+    screen = models.ForeignKey(Screen, null=True, on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
+    date = models.ForeignKey(ShowDay, null=True, on_delete=models.SET_NULL)
+    time = models.ForeignKey(ShowTime, null=True, on_delete=models.SET_NULL)
+    date_created = models.DateTimeField(auto_now_add = True, null =True)  
+
+
+    def __str__(self):  
+        return self.time 
 
 
 class Ticket(models.Model):
