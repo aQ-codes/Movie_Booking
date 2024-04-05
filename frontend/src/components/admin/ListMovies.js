@@ -2,7 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
-import Navbar from "./Navbar";
+import MovieStatusLinks from "./MovieStatusLinks";
+
 import ListMovieItem from "./ListMovieItem";
 import {  useSelector } from "react-redux";
 // import checkAuth from "./auth/checkAuth"
@@ -71,38 +72,19 @@ function ListMovies() {
 
   return (
     <>
+    <MovieStatusLinks/>
+  
+
+
     <div className="row">
-      <div className="col-8">
+      <div className="col-12 ">
+
+      <div class="card">
+      <div class="card-header movies-status-header bg-white text-dark">ALL MOVIES</div>
+
+       </div>
+
         
-      <Link to="/admin/movies/add" className="btn btn-info mt-2 ml-2 mb-2">
-          Add Movie
-        </Link>
-      </div>
-    </div>
-
-    <div className="row">
-      <div className="col-10 ">
-
-
-        {/* <form>
-          <label>Search Movies :  &nbsp;</label>
-          <input
-            type="text"
-            value={SearchTerm}
-            onChange={handleSearchInputChange}
-          />
-          &nbsp;
-          <button
-            className="btn btn-small btn-outline-success"
-            type="button"
-            onClick={handleSearch}
-          >
-            Search
-          </button>
-          &nbsp;
-        </form> */}
-
-         
         <table className="table table-striped table-hover mt-3 text-center table-bordered">
         <thead>
 

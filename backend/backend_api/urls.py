@@ -2,9 +2,23 @@ from django.urls import path
 from . import views
 from django.conf import settings #new
 from django.conf.urls.static import static #new
+
 urlpatterns = [
-    path('register/', views.signup, name="admin-register"),
-    path('login/', views.login, name="admin-login"),
+              #admin
+    path('admin/login/', views.admin_login, name="admin-login"),
+    path('admin/logout/', views.admin_logout, name="admin-login"),
+
+    #get movies based on status 
+    path('movies/', views.list_movies, name="get-all-movies"),
+    path('running/', views.list_running, name="get-running"),
+    path('movies/paused', views.paused_movies, name="get-all-movies"),
+    path('movies/upcoming', views.upcoming_movies, name="get-all-movies"),
+    path('movies/completed', views.completed_movies, name="get-all-movies"),
+   
+
+    
+    
+    
 
     path('customers/', views.customers, name="get-all-customers"),
     path('customer/<int:pk>', views.customer, name="get-customer"),
@@ -12,7 +26,6 @@ urlpatterns = [
     path('customer/logout/', views.customer_logout, name="customer"),
 
 
-    path('movies/', views.list_movies, name="get-all-movies"),
     path('movies/<int:pk>', views.movie_detail, name="get-movie"),
     path('movies/<int:pk>/edit', views.movie_detail, name="edit-movie"),
     path('movies/<int:pk>/delete', views.movie_detail, name="edit-movie"),
@@ -38,12 +51,7 @@ urlpatterns = [
 
     path('tickets/', views.list_tickets, name="get-all-tickets"),
     path('tickets/<int:pk>', views.ticket_detail, name="get-ticket"),
-    # path('login/', views.login, name="api-login"),
-    # path('create/', views.create, name="api-create"),
-    # path('update/<int:pk>', views.update, name="api-edit"),
-    # path('delete/<int:pk>', views.delete, name="api-delete"),
-    # path('list/', views.list, name="api-list"),
-    path('running/', views.list_running, name="get-running"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) 

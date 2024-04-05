@@ -21,36 +21,61 @@ from .models import *
 
 
 
-
-#send as form data 
-@api_view(['POST'])
-@permission_classes((permissions.AllowAny,))
-def signup(request):
-    form = UserCreationForm(data=request.data)
-    if form.is_valid():
-        user = form.save()
-        return Response("account created successfully", status=status.HTTP_201_CREATED)
-    return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-# send as form data 
+#admin Login
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
-def login(request):
-    username = request.data.get("username")
-    password = request.data.get("password")
-    if username is None or password is None:
-        return Response({'error': 'Please provide both username and password'},
-                        status=HTTP_400_BAD_REQUEST)
-    user = authenticate(username=username, password=password)
-    if not user:
-        return Response({'error': 'Invalid Credentials'},
-                        status=HTTP_404_NOT_FOUND)
-    token, _ = Token.objects.get_or_create(user=user)
-    return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
- 
+def admin_login(request):
+     username = request.data.get("username")
+     password = request.data.get("password")
+     user = authenticate(username=username, password=password)
+     if user:
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key, 'user_id': user.id , })
+     else:
+      return Response({'error': 'Invalid Credentials'})
+     
+#admin logout   
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def admin_logout(request):
+    logout(request)
+    return Response({'bool':True,'message':'logout successfully'})   
+
+
+
+# customer login
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def customer_login(request):  
+    #  msg = {
+    #      'bool':True,
+    #      'post':request.data.get('email')
+
+    #  }
+    #  return Response(msg)
+
+     username = request.data.get("email")
+     password = request.data.get("password")
+     user = authenticate(username=username, password=password)
+     if user:
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key, 'user_id': user.id , 'email': user.username})
+
+
+
+#customer logout   
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def customer_logout(request):
+    logout(request)
+    return Response({'bool':True,'message':'logout successfully'})   
+
+
+
 
 
 
@@ -72,71 +97,7 @@ def customer(request, pk):
     return Response(serializer.data)      
 
 
-@csrf_exempt
-@api_view(['POST'])
-@permission_classes((AllowAny,))
-def customer_login(request):  
-    #  msg = {
-    #      'bool':True,
-    #      'post':request.data.get('email')
-
-    #  }
-    #  return Response(msg)
-
-     username = request.data.get("email")
-     password = request.data.get("password")
-     user = authenticate(username=username, password=password)
-     if user:
-        token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user_id': user.id , 'email': user.username})
-     
-     return Response({'error': 'Invalid Email or Password !!'})
-
- 
-    # if user:
-    #      return Response({'success': 'right credentials'},
-    #                     status=HTTP_404_NOT_FOUND)
-    # if not user:
-    #     return Response({'error': 'Invalid Credentials'},
-    #                     status=HTTP_404_NOT_FOUND)
-
-    # 
-    # return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
-@csrf_exempt
-@api_view(['POST'])
-@permission_classes((AllowAny,))
-def customer_logout(request):
-    logout(request)
-    return Response({'bool':True,'message':'logout successfully'})    
-
-    
-
-
-
-
-
-# @csrf_exempt
-# @api_view(["POST"])
-# @permission_classes((AllowAny,))
-# def customer_login(request):
-#     username = request.data.get("email")
-#     password = request.data.get("password")
-#     if username is None or password is None:
-#         return Response({'error': 'Please provide both username and password'},
-#                         status=HTTP_400_BAD_REQUEST)
-#     user = authenticate(username=username, password=password)
-#     if not user:
-#         return Response({'error': 'Invalid Credentials'},
-#                         status=HTTP_404_NOT_FOUND)
-#     token, _ = Token.objects.get_or_create(user=user)
-#     return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
-
-
-
-
-
-
-
+#get all movies and add new movie
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def list_movies(request):     
@@ -153,11 +114,48 @@ def list_movies(request):
             return Response('Successfull created')
         else:
             return Response(serializer.errors)
+
+
+#get running movies
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def list_running(request):       
+   
+   movies = Movie.objects.filter(status__iexact='running') 
+   serializer = MovieSerializer(movies, many = True)
+   return Response(serializer.data)     
+
+
+#get paused movies
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def paused_movies(request):       
+   
+   movies = Movie.objects.filter(status__iexact='paused') 
+   serializer = MovieSerializer(movies, many = True)
+   return Response(serializer.data)     
+
+
+#get upcoming movies
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def upcoming_movies(request):       
+   
+   movies = Movie.objects.filter(status__iexact='upcoming') 
+   serializer = MovieSerializer(movies, many = True)
+   return Response(serializer.data)     
+
+
+#get completed movies
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def completed_movies(request):       
+   
+   movies = Movie.objects.filter(status__iexact='completed') 
+   serializer = MovieSerializer(movies, many = True)
+   return Response(serializer.data)     
+
         
-
-
-
-  
  
 @api_view(['GET','PUT','DELETE'])
 # @authentication_classes([TokenAuthentication])
@@ -345,14 +343,6 @@ def ticket_detail(request, pk):
 
 
 
-@api_view(['GET','POST'])
-@permission_classes((AllowAny,))
-def list_running(request):       
-   
-   movies = Movie.objects.filter(status__iexact='running') 
-   serializer = MovieSerializer(movies, many = True)
-   return Response(serializer.data)     
-# @api_view(['POST'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
 # def create(request):
@@ -393,3 +383,21 @@ def list_running(request):
 #     return Response("deleted successfully")
 
      
+
+
+# @csrf_exempt
+# @api_view(["POST"])
+# @permission_classes((AllowAny,))
+# def login(request):
+#     username = request.data.get("username")
+#     password = request.data.get("password")
+#     if username is None or password is None:
+#         return Response({'error': 'Please provide both username and password'},
+#                         status=HTTP_400_BAD_REQUEST)
+#     user = authenticate(username=username, password=password)
+#     if not user:
+#         return Response({'error': 'Invalid Credentials'},
+#                         status=HTTP_404_NOT_FOUND)
+#     token, _ = Token.objects.get_or_create(user=user)
+#     return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
+ 

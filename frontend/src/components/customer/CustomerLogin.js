@@ -8,7 +8,7 @@ import person_icon from "../Assets/person.png";
 import  "./css/LoginSignup.css";
 import Navbar from "./Navbar";
 
-import {json, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 // import checkGuest from "./checkGuest";
 
 
@@ -54,6 +54,7 @@ function CustomerLogin() {
 
 
     const buttonEnable = (email!='') && (password!='')
+    
   return (
 
     <>

@@ -26,14 +26,13 @@ function ListMovieItem(props) {
                     <Link to={"/admin/movies/"+props.movie.id+"/view"} className="btn btn-outline-info">VIEW</Link>
                     </td>
                     <td>
-                    <Link to={"/admin/movies/"+props.movie.id+"/edit"} className="btn btn-outline-info">EDIT</Link>
+                    <Link to={"/admin/movies/"+props.movie.id+"/edit"} className="btn btn-outline-warning">EDIT</Link>
                     </td> 
                     <td>
-                    {/* <Link to={"/admin/movies/"+props.movie.id+"/delete"} className="btn btn-outline-info">DELETE</Link> */}
+                    <Link to={"/admin/movies/"+props.movie.id+"/delete"} className="btn btn-outline-danger">DELETE</Link>
                     </td> 
                     {/* <td>
-                    <button className="btn btn-outline-secondary " onClick={deleteMed}>Delete</button>
-                    </td>
+                  
               
         
         {/* <Link to={"/blog/posts/"+props.post.id} className="btn btn-info float-right">View</Link> */}

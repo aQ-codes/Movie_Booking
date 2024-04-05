@@ -6,16 +6,16 @@ class Customer(models.Model):
     # name = models.CharField(max_length = 200, null = True) 
     # phone = models.CharField(max_length = 200,null = True)
     # email = models.CharField(max_length = 200, null = True)
-    # date_created = models.DateTimeField(auto_now_add = True, null =True)  
+    # date_created = models.DateTimeField(auto_now_add = True, null =True) 
+    # mobile=models.PositiveBigIntegerField() 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    # mobile=models.PositiveBigIntegerField()
     email = models.CharField(max_length = 200, null = True)
-
-    
+   
     def __str__(self):  
          return self.user.username
     
-    
+
+   
     
 class Movie(models.Model):
     STATUS = (

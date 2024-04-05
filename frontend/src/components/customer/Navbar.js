@@ -1,11 +1,13 @@
 import React from 'react'
-import './css/navbar.css'
+import axios from 'axios'
 import logo from '../Assets/logo.png'
 import { Link } from 'react-router-dom'
 import { useSelector , useDispatch } from 'react-redux'
-import axios from 'axios'
-import { removeUser } from '../../store/authSlice'
 import { useNavigate } from 'react-router-dom'
+
+import { removeUser } from '../../store/authSlice'
+
+import './css/navbar.css'
 
 function Navbar() {
 
@@ -18,7 +20,7 @@ function Navbar() {
   function logout() {
     if (user) {
       axios.post(
-        "http://127.0.0.1:8000/api/customer/logout/",
+        "http://127.0.0.1:8000/api/admin/logout/",
         {},
         {
           headers: { Authorization: "Bearer " + user.token },

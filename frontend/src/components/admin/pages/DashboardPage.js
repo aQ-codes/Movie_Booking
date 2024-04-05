@@ -1,10 +1,14 @@
 import React from 'react'
+
+import checkAuthAdmin from "../auth/checkAuthAdmin"
+
 import Navbar from "../Navbar";
 import Sidenav from '../Sidenav';
 import ListAnalytics from '../ListAnalytics';
+
 import "../css/body.css";
 
-function Dashboard() {
+function DashboardPage() {
   return (
     <> 
     <Navbar/>
@@ -18,4 +22,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default checkAuthAdmin(DashboardPage)
