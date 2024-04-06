@@ -29,7 +29,7 @@ class Movie(models.Model):
     description = models.TextField(max_length = 200, null = True, blank = True)
     duration = models.IntegerField (null = True)   # time in minutes
     status = models.CharField(max_length = 200, null = True, choices = STATUS,default='Upcoming')
-    poster = models.ImageField(upload_to='upload/images', height_field=None, width_field=None, max_length=100, blank=True, null = True)
+    poster = models.ImageField(upload_to='upload/images/movies', height_field=None, width_field=None, max_length=100, blank=True, null = True)
 
     def __str__(self):  
         return self.title

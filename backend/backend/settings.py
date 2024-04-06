@@ -136,13 +136,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_URL = '/images/'          #new
+MEDIA_URL = '/media/'          #new
 
 STATICFILES_DIRS = [           #new
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images') #new #for  adding images to backend
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #new #for  adding images to backend
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

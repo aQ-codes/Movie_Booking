@@ -77,9 +77,6 @@ def customer_logout(request):
 
 
 
-
-
-
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def customers(request):     
@@ -97,7 +94,12 @@ def customer(request, pk):
     return Response(serializer.data)      
 
 
-#get all movies and add new movie
+
+
+
+#-----------------getting movies based on status------------
+
+#get all movies and add a new movie
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def list_movies(request):     
@@ -108,13 +110,13 @@ def list_movies(request):
         return Response(serializer.data)          
     
     if request.method == 'POST':
+        
         serializer = MovieSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response('Successfull created')
+           serializer.save()   
+           return Response('Successfully created')
         else:
             return Response(serializer.errors)
-
 
 #get running movies
 @api_view(['GET','POST'])
@@ -125,7 +127,6 @@ def list_running(request):
    serializer = MovieSerializer(movies, many = True)
    return Response(serializer.data)     
 
-
 #get paused movies
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
@@ -134,7 +135,6 @@ def paused_movies(request):
    movies = Movie.objects.filter(status__iexact='paused') 
    serializer = MovieSerializer(movies, many = True)
    return Response(serializer.data)     
-
 
 #get upcoming movies
 @api_view(['GET','POST'])
@@ -145,7 +145,6 @@ def upcoming_movies(request):
    serializer = MovieSerializer(movies, many = True)
    return Response(serializer.data)     
 
-
 #get completed movies
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
@@ -155,38 +154,81 @@ def completed_movies(request):
    serializer = MovieSerializer(movies, many = True)
    return Response(serializer.data)     
 
-        
- 
-@api_view(['GET','PUT','DELETE'])
+
+
+
+#----------getting,adding,updating,deleting movie---------------
+
+#view and delete particular movie
+@api_view(['GET','DELETE'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
 @permission_classes((AllowAny,))
 def movie_detail(request, pk):
-    # product = get_object_or_404(, pk=pk)
-    movie = Movie.objects.get(id=pk)
-
+    # movie = get_object_or_404(Movie, pk=pk)
+    # movie = Movie.objects.get(id=pk)
     if request.method == 'GET':
-        # movie = Movie.objects.get(id=pk)
+        movie = Movie.objects.get(id=pk)
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
+    
 
-
-    if request.method == 'PUT':
-        serializer = MovieSerializer(movie,data=request.data)
-        if serializer.is_valid():
+    if request.method == 'DELETE':
+         movie = Movie.objects.get(id=pk)
+         movie.delete()
+         return Response("Deleted successfully")
+    
+#edit movie
+@api_view(["PUT"])
+@permission_classes((AllowAny,))
+def movie_detail_edit(request,pk):  
+    movie = Movie.objects.get(id=pk)
+    serializer = MovieSerializer(movie,data=request.data)
+    if serializer.is_valid():
             serializer.save()
             return Response('Successfully updated')
+    else:
+            return Response("Failed To Update")
+
+
+
+
+
+#-------------------show dates-------------------------------
+#get all dates and add new date
+@api_view(["GET","POST"])
+@permission_classes((AllowAny,))
+def list_dates(request):   
+    
+  if request.method == 'GET':  
+    days = ShowDay.objects.all()  
+    serializer =ShowDaySerializer(days, many = True)
+    return Response(serializer.data)             
+    
+  if request.method == 'POST':
+        
+        serializer = ShowDaySerializer(data=request.data)
+        if serializer.is_valid():
+           serializer.save()   
+           return Response('Successfully added date')
         else:
-            return Response(serializer.errors)
-        
-    if request.method == 'DELETE':
-        
-            movie.delete()
-            return Response("deleted successfully")
+            return Response({'error': serializer.errors})
 
 
 
-     
+
+
+
+
+
+
+
+
+
+
+
+#-------------------------screens----------------------------
+#get all screens    
 @api_view(["GET"])
 @permission_classes((AllowAny,))
 def list_screens(request):     
@@ -196,6 +238,10 @@ def list_screens(request):
     return Response(serializer.data)     
 
 
+
+
+#---------------------------show time----------------------------
+#get all show times
 @api_view(["GET"])
 @permission_classes((AllowAny,))
 def list_showtimes(request):     

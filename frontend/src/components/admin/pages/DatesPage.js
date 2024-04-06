@@ -1,27 +1,21 @@
 import React from 'react'
+import ListDate from '../ListDate'
 import Navbar from "../Navbar";
 import Sidenav from '../Sidenav';
-import ListMovies from '../ListMovies'
-import MovieStatusLinks from '../MovieStatusLinks';
 
-function Movies() {
+function DatesPage() {
   return (
     <>
-    <Navbar/>
+     <Navbar/>
     <div className ="wrapper">
        <Sidenav/> 
        <div className="main">
-       <MovieStatusLinks/>
-       <ListMovies/>
+       <ListDate/>
        </div>
     </div>
+  
     </>
   )
 }
 
-export default Movies
-
-
-
-
-   
+export default DatesPage

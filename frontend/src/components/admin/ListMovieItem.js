@@ -1,9 +1,12 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {  useSelector } from "react-redux";
+import Popup from "../global/Popup";
 
 
 function ListMovieItem(props) {
+
+
     // var user = useSelector(store=>store.auth.user);
 
     // function deleteMed() {
@@ -28,12 +31,16 @@ function ListMovieItem(props) {
                     <td>
                     <Link to={"/admin/movies/"+props.movie.id+"/edit"} className="btn btn-outline-warning">EDIT</Link>
                     </td> 
-                    <td>
+                    {/* <td>
                     <Link to={"/admin/movies/"+props.movie.id+"/delete"} className="btn btn-outline-danger">DELETE</Link>
-                    </td> 
+                    </td>  */}
+                  
+
+
+
                     {/* <td>
                   
-              
+                 
         
         {/* <Link to={"/blog/posts/"+props.post.id} className="btn btn-info float-right">View</Link> */}
     </>

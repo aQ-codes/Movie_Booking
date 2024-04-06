@@ -1,27 +1,23 @@
 import React from 'react'
 import Navbar from "../Navbar";
 import Sidenav from '../Sidenav';
-import ListMovies from '../ListMovies'
-import MovieStatusLinks from '../MovieStatusLinks';
 
-function Movies() {
+import MovieStatusLinks from '../MovieStatusLinks';
+import CompletedMovies from '../CompletedMovies'
+
+function CompletedMoviesPage() {
   return (
     <>
     <Navbar/>
     <div className ="wrapper">
        <Sidenav/> 
        <div className="main">
-       <MovieStatusLinks/>
-       <ListMovies/>
+        <MovieStatusLinks/>
+        <CompletedMovies/>
        </div>
     </div>
     </>
   )
 }
 
-export default Movies
-
-
-
-
-   
+export default CompletedMoviesPage

@@ -36,8 +36,8 @@ function Navbar() {
 <nav className="navbar navbar-expand-lg admin-nav navbar-dark yoho "  >
 <div className="container-fluid " >
 <Link to='/admin/' className="navbar-brand " href="#">
-       <img className='brand-logo ' src={logo} height="40" width="80" />
-       <span className='outer-brand'>View </span> <span className='outer-brand inner-brand'>Bliss </span>
+       <img className='brand-logo ' src={logo} height="30" width="60" />
+       <span className='outer-brand pacifico-regular'>View</span><span className='outer-brand inner-brand pacifico-regular'>Bliss </span>
 </Link>
 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span className="navbar-toggler-icon"></span>
@@ -73,7 +73,7 @@ function Navbar() {
 
     {admin ? (  <>
 
-<button className="btn btn-outline-secondary my-2 my-sm-0" type="submit" onClick={logout}>
+<button className="btn btn-outline-secondary my-2 my-sm-0 btn-sm" type="submit" onClick={logout}>
 
 
       

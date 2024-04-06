@@ -6,10 +6,12 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
 
+
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
+  
     
     def create(self, validated_data):
         Movie.objects.create(**validated_data)

@@ -14,12 +14,11 @@
 
 .outer-brand{
    color: rgb(27, 123, 192);
-   
+   font-weight: 800;
    font-style: italic;
-   /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-   font-size: 20px;
-  
+   /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    */
+
 
 }
 .inner-brand{
@@ -57,7 +56,7 @@ hr.divider-light {
 
 header.masthead {
     padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-bottom: 4rem;
 
 }
 

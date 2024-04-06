@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
-import MovieStatusLinks from "./MovieStatusLinks";
 
 import ListMovieItem from "./ListMovieItem";
 import {  useSelector } from "react-redux";
@@ -72,15 +71,12 @@ function ListMovies() {
 
   return (
     <>
-    <MovieStatusLinks/>
-  
-
 
     <div className="row">
       <div className="col-12 ">
 
       <div class="card">
-      <div class="card-header movies-status-header bg-white text-dark">ALL MOVIES</div>
+      <div class="card-header card-header-e movies-status-header bg-white text-dark">ALL MOVIES</div>
 
        </div>
 
@@ -115,7 +111,7 @@ function ListMovies() {
         </table>
       </div>
     </div>
-  {/* </div> */}
+
   </>
   );
 }

@@ -5,10 +5,13 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import {  useSelector } from "react-redux";
-
+import Popup from "../global/Popup";
 
 
 function ViewMovie() {
+ 
+  const [popup, setPopup] = useState(false)
+  const [img, setImg] = useState([]) //movie image from server
 
 
     // var user = useSelector(store=>store.auth.user);
@@ -26,10 +29,15 @@ function ViewMovie() {
     useEffect(()=>{
         axios.get('http://127.0.0.1:8000/api/movies/'+movId).then(response=>{
             setMovie(response.data)
+            let imgLink = 'http://127.0.0.1:8000' + response.data.poster
+            console.log(imgLink)
+            // conso
+            setImg(imgLink)
+
         })
     },[movId]);
 
-
+  
     function deleteMovie() {
         axios.delete('http://127.0.0.1:8000/api/movies/'+movId+'/delete',
       ).then(response=>{
@@ -37,6 +45,10 @@ function ViewMovie() {
 
 
         })
+    }
+
+    function setPopupfn(){
+      setPopup(true)
     }
 
   return (
@@ -47,7 +59,7 @@ function ViewMovie() {
     <div className="col-md-3 mb-3">
 
       <div className="card">
-      <img src={broly} class="card-img-top img-thumbnail img-movie-detail" alt="" />
+      <img src={img} class="card-img-top img-thumbnail img-movie-detail" alt="" />
         <div class="card-footer w-100 text-muted">
         <a href="#" class="btn btn-primary mr-2"> ADD SHOW </a>
         &nbsp;&nbsp;
@@ -74,7 +86,18 @@ function ViewMovie() {
         <Link to={"/admin/movies/"+movId+"/edit"} className="btn btn-primary">EDIT</Link>
         &nbsp;&nbsp;
         {/* <Link to={"/admin/movies/"+movId+"/delete"} className="btn btn-danger">DELETE</Link> */}
-        <button className="btn btn-danger " onClick={deleteMovie}>Delete</button>
+        <button className="btn btn-danger " onClick={setPopupfn}>Delete</button>
+
+
+        <Popup trigger={popup}>
+  
+  <div className='text-danger text-center'><h3>Are You Sure want to delete this item ?</h3></div>
+       <div class="modal-footer my-4 card-footer  mx-auto">
+           <button type="button" class="btn btn-danger  " onClick={deleteMovie} >OK</button>
+         </div> 
+       </Popup>
+
+
         </div>
       </div>
     </div>
