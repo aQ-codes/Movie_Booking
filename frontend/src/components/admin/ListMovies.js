@@ -95,11 +95,6 @@ function ListMovies() {
           </thead>
           <tbody>
           
-            {/* {meds.map(med =>  <tr><ListItem key={med.id} medicine={med} refresh={fetchMeds}/>  </tr> )}  */}
-            {/* {filteredMeds.length === 0 ? (
-              <p>No matching posts found.</p>
-             ) 
-             : ( */}
               {movies.map((movie) => ( <tr><ListMovieItem key={movie.id} movie={movie} refresh={fetchMovies}/>  </tr>      ))}
              
 

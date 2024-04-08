@@ -1,25 +1,22 @@
 import React from 'react'
-
 import Navbar from "../Navbar";
 import Sidenav from '../Sidenav';
-import ViewMovie from '../ViewMovie'
-import ListMovieShows from '../ListMovieShows';
+import AllShows from '../AllShows';
+import MovieStatusLinks from '../MovieStatusLinks';
 
-function MovieDetail() {
+function AllShowsPage() {
   return (
     <>
     <Navbar/>
     <div className ="wrapper">
        <Sidenav/> 
        <div className="main">
-       <ViewMovie/>
-       <ListMovieShows/>
-
+       {/* <MovieStatusLinks/> */}
+       <AllShows/>
        </div>
     </div>
     </>
-   
   )
 }
 
-export default MovieDetail
+export default AllShowsPage

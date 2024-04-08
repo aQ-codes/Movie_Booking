@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import logo from '../Assets/logo.png'
 import { Link } from 'react-router-dom'
 import { useSelector , useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { removeUser } from '../../store/authSlice'
 
+import logo from '../Assets/viewbliss-logo.png'
 import './css/navbar.css'
 
 function Navbar() {
@@ -40,27 +40,32 @@ function Navbar() {
 
 
   return (
+    <>
+ 
+    <nav class="navbar navbar-dark  navbar-expand-lg  NAVBOY fixed-top">
 
-    <nav class="navbar navbar-expand-lg navbar-dark NAVBOY fixed-top">
-      {/* <!-- Container wrapper --> */}
-      <div class="container-fluid">
-        {/* <!-- Toggle button --> */}
-      
+
+      <div class="container ">
+
+{/* 
+      <img className='navboy-item'
+    src={logo}
+    height="20"
+    alt="our_Logo"
+    loading="lazy"
+  /> */}
+  <Link to='/admin/' className="navbar-brand " href="#">
     
-        {/* <!-- Collapsible wrapper --> */}
-        <div class=" navbar-collapse ourlogo" id="navbarSupportedContent">
-          {/* <!-- Navbar brand --> */}
-          <img className=' navboy-item'
-              src={logo}
-              height="30"
-              alt="our_Logo"
-              loading="lazy"
-            />
+       <span className='outer-brand pacifico-regular'>View</span><span className='outer-brand inner-brand pacifico-regular'>Bliss </span>
+  </Link>
 
-          <a class=" mt-2 mt-lg-0 navboy-item navboy-title ourlogo" href="#">ViewBliss Cinemas
-          </a>
-           &nbsp; &nbsp;  &nbsp;
-          {/* <!-- Left links --> */}
+
+
+   
+        <div class=" navbar-collapse ourlogo" id="navbarSupportedContent">
+      
+         
+
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-2">
             <li class="nav-item">
             <Link to={"/home"} class="nav-link navboy-item navboy-item-link"  href="#">Now Showing</Link>
@@ -125,7 +130,7 @@ function Navbar() {
       </div>
       {/* <!-- Container wrapper --> */}
     </nav>
-  )
+    </> )
 }
 
 export default Navbar

@@ -31,20 +31,20 @@ function Sidenav() {
                 </li>
                 
                 <li className="sidebar-item">
-                <Link to="/admin/shows/add" className="sidebar-link" >
+                <Link to="/admin/shows" className="sidebar-link" >
                 <i class="lni lni-video"></i>
 
 
                         <span>Shows</span>
                 </Link>
                    
-                <Link to="/admin/shows/add" className="sidebar-link" >
+                <Link to="/admin/dates/" className="sidebar-link" >
 
                         <i class="lni lni-calendar"></i>
                         <span>Dates</span>
                 </Link>
                    
-                    <ul id="multi" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    {/* <ul id="multi" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li className="sidebar-item">
                             <a href="#" className="sidebar-link collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
@@ -59,7 +59,7 @@ function Sidenav() {
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> */}
                 </li>
                 <li className="sidebar-item">
                     <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"

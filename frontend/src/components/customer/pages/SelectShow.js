@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar from './Navbar';
-import Seats from './Seats';
-import Show from './Show';
-import './css/selectshow.css'
+import Navbar from '../Navbar';
+import Seats from '../Seats';
+import Show from '../Show';
+import '../css/selectshow.css'
 
 
 
-function SelectShow(props) {
+function SelectShow() {
 
 
 // const { state } = this.props.location;

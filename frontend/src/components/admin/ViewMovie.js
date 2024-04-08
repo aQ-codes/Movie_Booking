@@ -60,11 +60,6 @@ function ViewMovie() {
 
       <div className="card">
       <img src={img} class="card-img-top img-thumbnail img-movie-detail" alt="" />
-        <div class="card-footer w-100 text-muted">
-        <a href="#" class="btn btn-primary mr-2"> ADD SHOW </a>
-        &nbsp;&nbsp;
-        <a href="#" class="btn btn-primary"> EDIT SHOW </a>
-        </div>
       </div>
 
     </div>
@@ -72,7 +67,7 @@ function ViewMovie() {
     <div class="col-md-5 mb-3">
       <div class="card">
         
-      <div className="card-header">
+      <div className="card-header card-header-e bg-info">
       <h2 class="card-title">{movie.title}</h2>
       </div>
         <div class="card-body">
@@ -83,22 +78,22 @@ function ViewMovie() {
           
         </div>
         <div className="card-footer">
-        <Link to={"/admin/movies/"+movId+"/edit"} className="btn btn-primary">EDIT</Link>
+        <Link to={"/admin/movies/"+movId+"/edit"} className="btn btn-outline-primary">EDIT</Link>
         &nbsp;&nbsp;
-        {/* <Link to={"/admin/movies/"+movId+"/delete"} className="btn btn-danger">DELETE</Link> */}
         <button className="btn btn-danger " onClick={setPopupfn}>Delete</button>
+        </div>
 
 
         <Popup trigger={popup}>
   
-  <div className='text-danger text-center'><h3>Are You Sure want to delete this item ?</h3></div>
+  <div className='text-danger text-center'><h3>Are You Sure want to delete this item ?</h3>
+  </div>
        <div class="modal-footer my-4 card-footer  mx-auto">
            <button type="button" class="btn btn-danger  " onClick={deleteMovie} >OK</button>
          </div> 
+
        </Popup>
-
-
-        </div>
+ 
       </div>
     </div>
  

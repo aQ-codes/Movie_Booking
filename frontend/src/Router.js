@@ -8,7 +8,7 @@ import MovieDetail from "./components/admin/pages/MovieDetail";
 import EditMovieDetail from "./components/admin/pages/EditMovieDetail"
 import AddShowPage from "./components/admin/pages/AddShowPage";
 import Home from "./components/customer/pages/Home";
-import SelectShow from "./components/customer/SelectShow";
+import SelectShow from "./components/customer/pages/SelectShow";
 import CustomerLogin from "./components/customer/CustomerLogin";
 import CustomerRegister from "./components/customer/CustomerRegister";
 import HomePageAdmin from "./components/admin/pages/HomePageAdmin";
@@ -20,20 +20,26 @@ import UpcomingMoviesPage from "./components/admin/pages/UpcomingMoviesPage";
 import CompletedMoviesPage from "./components/admin/pages/CompletedMoviesPage";
 import DeleteMovie from "./components/admin/DeleteMovie";
 import DatesPage from "./components/admin/pages/DatesPage";
+import AllShowsPage from "./components/admin/pages/AllShowsPage";
 
 
 
 const router = createBrowserRouter([
 
           //customer routes
+
     { path: '', element: <App/> },
     { path: 'home', element: <Home/> },
     { path: 'register', element: <CustomerRegister/> },
     { path: 'login', element: <CustomerLogin/> },
-    { path: 'select/:movId', element: <SelectShow/> },
+    { path: 'select/movie/:movId', element: <SelectShow/> },
+    { path: 'select/date/:dateId', element: <SelectShow/> },
     
 
-           // admin routes
+
+
+             // admin routes
+
     { path: 'admin/', element: <HomePageAdmin/> },
     { path: 'admin/login', element: <AdminLoginPage/> },
     { path: 'admin/dashboard', element: <DashboardPage/> },
@@ -48,6 +54,11 @@ const router = createBrowserRouter([
     { path: 'admin/movies/:movId/view', element: <MovieDetail/> },
     { path: 'admin/movies/:movId/edit', element: <EditMovieDetail/> },
     { path: 'admin/movies/:movId/delete', element: <DeleteMovie/> },
+    //-------------------all shows--------------------
+    { path: 'admin/shows', element: <AllShowsPage/> },
+
+
+
     //--------------------dates---------------------------
     { path: 'admin/dates', element: <DatesPage/> },
 

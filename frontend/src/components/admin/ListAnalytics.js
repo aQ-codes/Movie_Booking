@@ -9,14 +9,14 @@ function ListAnalytics() {
                     <div className="mb-3">
                         <h3 className="fw-bold fs-4 mb-3">Dashboard</h3>
                         <div className="row">
-                            <div className="col-12 col-md-4 ">
-                                <div className="card border-0 card-color" >
+                            <div className="col-12 col-md-4  ">
+                                <div className="card border-0 card-color bg-primary" >
                                     <div className="card-body py-4 ">
                                         <h5 className="mb-2 fw-bold">
                                             Total Bookings
                                         </h5>
                                         <p className="mb-2 fw-bold">
-                                            $72,540
+                                            122
                                         </p>
                                         <div className="mb-0">
                                             <span className="badge text-success me-2">
@@ -30,13 +30,13 @@ function ListAnalytics() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 ">
-                                <div className="card  border-0 card-color">
+                                <div className="card bg-warning  border-0 card-color">
                                     <div className="card-body py-4">
                                         <h5 className="mb-2 fw-bold">
                                             Total Shows
                                         </h5>
                                         <p className="mb-2 fw-bold">
-                                            $72,540
+                                            35
                                         </p>
                                         <div className="mb-0">
                                             <span className="badge text-success me-2">
@@ -50,13 +50,13 @@ function ListAnalytics() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 ">
-                                <div className="card border-0 card-color">
+                                <div className="card bg-info border-0 card-color">
                                     <div className="card-body py-4">
                                         <h5 className="mb-2 fw-bold">
                                             Estimated Earnings
                                         </h5>
                                         <p className="mb-2 fw-bold">
-                                            $72,540
+                                            Rs 72,540
                                         </p>
                                         <div className="mb-0">
                                             <span className="badge text-success me-2">

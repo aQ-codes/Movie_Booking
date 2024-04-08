@@ -11,6 +11,8 @@ function ListShows() {
   // var user = useSelector(store=>store.auth.user);
   var [movies, setMovies]=useState([]);
   let navigate = useNavigate();
+  const [img, setImg] = useState('')
+ 
 
   async function fetchRunning(){
       axios.get('http://127.0.0.1:8000/api/running/'
@@ -19,7 +21,9 @@ function ListShows() {
   // //   }
     ).then(response=>{
           setMovies(response.data);
-          // console.log(response.data)
+        //   console.log(response.data)
+          
+          
       })
   }
   

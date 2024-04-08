@@ -1,12 +1,15 @@
 import React from 'react'
 import broly from "../Assets/broly.jpg";
 import { Link } from "react-router-dom";
-
+import { useState } from 'react';
 function ShowCard(props) {
 
   const title = props.movie.title
   const dataToPass = { name: title };
-  // console.log(title)
+  let imgLink = 'http://127.0.0.1:8000' + props.movie.poster
+            // console.log(imgLink)
+            
+  // console.log(props.movie)
   return (
     <>
     
@@ -15,7 +18,7 @@ function ShowCard(props) {
     <div class="movie_card" id="tomb">
   <div class="info_section">
     <div class="movie_header">
-      <img class="locandina" src="https://mr.comingsoon.it/imgdb/locandine/235x336/53715.jpg"/>
+      <img class="locandina" src={imgLink}/>
       <h1>{props.movie.title}</h1>
       <h4>2018, <span>{props.movie.language}</span></h4>
       <span class="minutes">{props.movie.duration} mins</span>
@@ -29,15 +32,7 @@ function ShowCard(props) {
     <div class="movie_social">
       <ul>
 
-      {/* <Link to={"/select/"+props.movie.id} >
-      <li>
-      <i class="fa fa-ticket"></i>
-      <i class="material-icons">GET YOUR TICKETS</i>
-  
-      </li>
-
-      </Link> */}
-      <Link to={{ pathname: "/select/"+props.movie.id, state:  dataToPass }}>
+      <Link to={{ pathname: "/select/movie/"+props.movie.id, state:  dataToPass }}>
       <li>
       <i class="fa fa-ticket"></i>
       <i class="material-icons">GET YOUR TICKETS</i>
@@ -51,7 +46,7 @@ function ShowCard(props) {
     </div>
   </div>
   <div class="blur_back ave_back" style={{  
-  backgroundImage: "url(" + broly + ")",
+  backgroundImage: "url(" + imgLink + ")",
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat'

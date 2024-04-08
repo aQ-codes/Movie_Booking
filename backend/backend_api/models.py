@@ -52,6 +52,7 @@ class ShowDay(models.Model):
 
 class Screen(models.Model):
     name = models.CharField(max_length = 200, blank=False, null = False)
+  
 
     def __str__(self):  
         return self.name
@@ -59,14 +60,16 @@ class Screen(models.Model):
 
 class Show(models.Model):
     SHOW_STATUS = (
+        ('active', 'active'),
         ('disabled', 'disabled'),
-        ('enabled', 'enabled'),
+        ('finished', 'finished'),
         )
     movie = models.ForeignKey(Movie, null=True, on_delete=models.SET_NULL)
     date = models.ForeignKey(ShowDay, null=True, on_delete=models.SET_NULL)
     time = models.ForeignKey(ShowTime, null=True, on_delete=models.SET_NULL)
     screen = models.ForeignKey(Screen, null=True, on_delete=models.SET_NULL)
-    status = models.CharField(max_length = 200, null = True, choices = SHOW_STATUS, default='enabled')
+    status = models.CharField(max_length = 200, null = True, choices = SHOW_STATUS, default='active')
+    price = models.FloatField (null = True) 
  
 
 
@@ -77,7 +80,6 @@ class Show(models.Model):
 class Booking(models.Model):
     bk_id = models.CharField(max_length = 200, blank=False, null = False)
     show = models.ForeignKey(Show, null=True, on_delete=models.SET_NULL)
-    screen = models.ForeignKey(Screen, null=True, on_delete=models.SET_NULL)
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add = True, null =True)  
 

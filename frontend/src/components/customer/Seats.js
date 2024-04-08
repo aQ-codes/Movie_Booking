@@ -4,29 +4,38 @@ function Seats() {
   return (
     <>
    
+   <div className='col-6 '>
 
+    <div class='seat-page me-5 '>
 
-    <div class='seat-page col-6 '>
-        <ul class="showcase">
-        <li>
-            <div class="seat"></div>
-            <small>N/A</small>
-        </li>
+        <ul class="showcase  px-5">
+            <li>
+                <div class="seat"></div>
+                <small>Available</small>
+            </li>
 
-        <li>
-            <div class="seat selected"></div>
-            <small>Selected</small>
-        </li>
+            
+            <li>
+                <div class="seat occupied"></div>
+                <small>Occupied</small>
+            </li>
 
-        <li>
-            <div class="seat occupied"></div>
-            <small>Occupied</small>
-        </li>
+            <li>
+                <div class="seat selected"></div>
+                <small>Selected</small>
+            </li>
+
         </ul>
 
-        <div class="container">
-        <div class="screen"></div>
-        <div class="row">
+        {/* <div class="screen "></div> */}
+
+        <div class="row seat-section mt-4  ">
+
+        <div className='text-center mb-4'> SCREEN </div>
+
+        <div class=" seat-row  px-auto">
+            <div class="seat"></div>
+            <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
@@ -36,7 +45,7 @@ function Seats() {
             <div class="seat"></div>
             <div class="seat"></div>
         </div>
-        <div class="row">
+        <div class="seat-row">
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
@@ -47,7 +56,7 @@ function Seats() {
             <div class="seat"></div>
         </div>
 
-        <div class="row">
+        <div class="seat-row">
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
@@ -58,7 +67,7 @@ function Seats() {
             <div class="seat occupied"></div>
         </div>
 
-        <div class="row">
+        <div class="seat-row">
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
@@ -69,18 +78,20 @@ function Seats() {
             <div class="seat"></div>
         </div>
 
-        <div class="row">
+        <div class="seat-row">
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat occupied"></div>
             <div class="seat occupied"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
         </div>
 
-        <div class="row">
+        <div class="seat-row">
             <div class="seat"></div>
             <div class="seat"></div>
             <div class="seat"></div>
@@ -90,15 +101,23 @@ function Seats() {
             <div class="seat occupied"></div>
             <div class="seat"></div>
         </div>
+        
         </div>
 
-        <p class="text">
-        You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
+        <div className='row  text-center p-4'>
+        {/* <h4>Showing Seats For The Show DragonBallSuper on  16-08-2024</h4> */}
+        <p class="text  ">
+        You have selected <span id="count">0</span> seats for a price of &#8377;<span id="total">0</span>
         </p>
+
+        <button className='col-6 btn btn-primary border-0 text-white p-2 mx-auto bk-txt'>Book Tickets</button>
+
+
+        </div>
 
 
     </div>
-
+</div>
     
     </>
   )

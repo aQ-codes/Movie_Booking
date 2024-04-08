@@ -24,12 +24,16 @@ urlpatterns = [
     path('dates/', views.list_dates,name="get-all-dates"),
 
     #show
+    #get all shows and add new show
     path('shows/', views.list_shows, name="get-all-shows"),
+    #show details of particular show without nested serializer
     path('shows/<int:pk>', views.show_detail, name="get-show"),
-    #show details of particular movie
+   #list all shows with nested serializer
     path('shows2/', views.list_shows2, name="get-all-shows"),
-    path('shows2/<int:pk>', views.show_detail2, name="get-all-shows"),
-
+    #all show details of particular active movie - nested serializer
+    path('shows2/<int:pk>/active', views.show_detail_active),
+    #get all shows by date nested serializer
+    path('shows2/date/<int:pk>', views.show_detail_date),
 
 
     path('customers/', views.customers, name="get-all-customers"),

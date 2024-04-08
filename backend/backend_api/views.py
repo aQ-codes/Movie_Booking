@@ -15,7 +15,6 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 
 from django.http import JsonResponse
 
- # from med.forms import MedicineForm
 from .serializers import *
 from .models import *
 
@@ -157,7 +156,7 @@ def completed_movies(request):
 
 
 
-#----------getting,adding,updating,deleting movie---------------
+#----------getting,adding,updating,deleting a particular movie---------------
 
 #view and delete particular movie
 @api_view(['GET','DELETE'])
@@ -178,7 +177,7 @@ def movie_detail(request, pk):
          movie.delete()
          return Response("Deleted successfully")
     
-#edit movie
+#edit particular movie
 @api_view(["PUT"])
 @permission_classes((AllowAny,))
 def movie_detail_edit(request,pk):  
@@ -195,7 +194,7 @@ def movie_detail_edit(request,pk):
 
 
 #-------------------show dates-------------------------------
-#get all dates and add new date
+#get all dates and add a new date
 @api_view(["GET","POST"])
 @permission_classes((AllowAny,))
 def list_dates(request):   
@@ -240,7 +239,7 @@ def list_screens(request):
 
 
 
-#---------------------------show time----------------------------
+#---------------------------show time slots----------------------------
 #get all show times
 @api_view(["GET"])
 @permission_classes((AllowAny,))
@@ -253,6 +252,10 @@ def list_showtimes(request):
 
 
 
+
+#-------------------------shows-----------------------------------------
+
+#get all shows and add a new show
 @api_view(["GET",'POST'])
 @permission_classes((AllowAny,))
 def list_shows(request):     
@@ -272,7 +275,7 @@ def list_shows(request):
             return Response(serializer.errors)
 
 
-
+##get a particular show detail - no nested serializer
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -285,8 +288,7 @@ def show_detail(request, pk):
     return Response(serializer.data)
 
 
-
-
+#list all shows with nested serializer
 @api_view(["GET",'POST'])
 @permission_classes((AllowAny,))
 def list_shows2(request):     
@@ -296,9 +298,7 @@ def list_shows2(request):
         
         return Response(serializer.data)
 
-
-
-
+#show details of marticular movie - nested serializer
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -309,6 +309,48 @@ def show_detail2(request, pk):
     shows = movie.show_set.all()
     serializer = ShowSerializer2(shows,  many = True)
     return Response(serializer.data)   
+
+
+
+
+#active show details of particular movie - nested serializer
+@api_view(['GET'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+@permission_classes((AllowAny,))
+def show_detail_active(request, pk):
+    # product = get_object_or_404(, pk=pk)
+    movie = Movie.objects.get(id=pk)
+    shows=movie.show_set.filter(status__iexact='active')
+    serializer = ShowSerializer2(shows,  many = True)
+    return Response(serializer.data)   
+
+
+
+@api_view(['GET'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+@permission_classes((AllowAny,))
+def show_detail_date(request, pk):
+    # product = get_object_or_404(, pk=pk)
+    date = ShowDay.objects.get(id=pk)
+    shows=date.show_set.filter(status__iexact='active')
+    serializer = ShowSerializer2(shows,  many = True)
+    return Response(serializer.data)   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

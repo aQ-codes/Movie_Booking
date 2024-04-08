@@ -11,8 +11,8 @@ class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
-  
-    
+
+
     def create(self, validated_data):
         Movie.objects.create(**validated_data)
         
@@ -38,6 +38,7 @@ class ShowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Show
         fields = '__all__'
+
 
 class ShowSerializer2(serializers.ModelSerializer):
     movie=MovieSerializer()
