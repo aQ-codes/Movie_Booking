@@ -98,25 +98,28 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(5,4,64,1) 43%, rgba(44
       height: 10%;
       padding-left: 15px;
       padding-bottom: 20px;
+
       ul{
         list-style: none;
         padding: 0;
         li{
           display: inline-block;
-          color: rgba(255,255,255,0.4);
+          color: rgba(255, 255, 255, 0.189);
           transition: color 0.3s;
           transition-delay: 0.15s;
-          margin: 60px 10px;
+          margin:80px 10px;
           &:hover{
             transition: color 0.3s;
             color: rgba(0, 255, 166, 0.8);
           }
           i{
-            font-size: 60px;
+            font-size: 40px;
             cursor: pointer;
+     
           }
           .fa-ticket{
-            font-size: 70px;
+            font-size: 40px;
+           
 
           }
         }
@@ -197,7 +200,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(5,4,64,1) 43%, rgba(44
 #tomb{
   box-shadow: 0px 0px 150px -45px rgba(14, 138, 240, 0.6);
   &:hover{
-    box-shadow: 0px 0px 120px -55px rgba(19, 160, 134, 0.6);
+    box-shadow: 0px 0px 150px -35px rgba(19, 160, 134, 0.6);
   }
 }
 

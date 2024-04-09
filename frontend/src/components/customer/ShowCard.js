@@ -20,7 +20,7 @@ function ShowCard(props) {
     <div class="movie_header">
       <img class="locandina" src={imgLink}/>
       <h1>{props.movie.title}</h1>
-      <h4>2018, <span>{props.movie.language}</span></h4>
+      <h4> <span>{props.movie.language}</span></h4>
       <span class="minutes">{props.movie.duration} mins</span>
       <p class="type">Action, Adventure, Sci-Fi</p>
     </div>

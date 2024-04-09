@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , logout
 from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_exempt
@@ -12,14 +13,16 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django.contrib.auth.hashers import make_password
 
 from django.http import JsonResponse
 
 from .serializers import *
 from .models import *
+from .models import Customer
 
 
-
+#----------------------------------admin------------------------------
 #admin Login
 @csrf_exempt
 @api_view(["POST"])
@@ -43,6 +46,33 @@ def admin_logout(request):
     return Response({'bool':True,'message':'logout successfully'})   
 
 
+#-----------------------------------customer----------------------------
+#customer Register
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def customer_register(request):     
+        username = request.data.get('email')
+        first_name = request.data.get('name')
+        password = request.data.get('password')
+        hashed_pass = make_password(password, salt=None, hasher='default')
+        user = User.objects.create(
+            first_name=first_name,
+            username=username,
+            password=hashed_pass
+        )
+        if user:
+            msg='user created'
+            customer = Customer.objects.create(
+                user=user
+            )
+            if customer:
+               return Response('Customer Created Successfully')
+            else:
+               return Response('user created but failed to create customer')
+        else :
+            return Response({'error': 'Technical Problem.Try After Some Time'})
+   
+        
 
 # customer login
 @csrf_exempt
@@ -60,9 +90,15 @@ def customer_login(request):
      password = request.data.get("password")
      user = authenticate(username=username, password=password)
      if user:
-        token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user_id': user.id , 'email': user.username})
-
+        customer = Customer.objects.get(user_id=user.id)
+        if customer:
+           token, _ = Token.objects.get_or_create(user=user)
+           return Response({'token': token.key, 'user_id': user.id , 'email': user.username})
+        else:
+             return Response({'error': 'No Account Found.Please Sign Up First'})
+        
+     else:
+        return Response({'error': 'Incorrect Email or Passwod.Please Try Again'})
 
 
 #customer logout   
@@ -156,7 +192,7 @@ def completed_movies(request):
 
 
 
-#----------getting,adding,updating,deleting a particular movie---------------
+#----------getting,updating,deleting a particular movie---------------
 
 #view and delete particular movie
 @api_view(['GET','DELETE'])

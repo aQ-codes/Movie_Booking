@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import {useNavigate} from "react-router-dom";
+
 import { setUser } from "../../store/authSlice";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
@@ -8,7 +10,6 @@ import person_icon from "../Assets/person.png";
 import  "./css/LoginSignup.css";
 import Navbar from "./Navbar";
 
-import {useNavigate} from "react-router-dom";
 // import checkGuest from "./checkGuest";
 
 
@@ -61,38 +62,38 @@ function CustomerLogin() {
     
     <Navbar/>
     <div className="loginsignup-page">
-    <div className="container loginsignup-container">
+    <div className="container loginsignup-container ">
       <div className="header">
-        <div className="heading">Welcome to ViewBliss</div>
+        <div className="heading text-primary">Start Your Bookings</div>
         <div className="underline"></div>
       </div>
       
     
 
-      <div className="inputs">
+      <div className="inputs ">
 
       { errorMessage && <p className="text-danger form-error">{errorMessage}</p>}
        
-          <div className="input">
+          <div className="input bg-dark">
             <img src={email_icon} alt="" />
-            <input type="email" placeholder="Email" value={email}
+            <input type="email" className="bg-dark inp-drk" placeholder="Email" value={email}
                         onInput={(event)=>setEmail(event.target.value)}/>
           </div>
         
-        <div className="input">
+        <div className="input bg-dark">
           <img src={password_icon} alt="" />
-          <input type="password" placeholder="Password" value={password} onInput={(event)=>setPassword(event.target.value)}/>
+          <input className="bg-dark inp-drk"  type="password" placeholder="Password" value={password} onInput={(event)=>setPassword(event.target.value)}/>
         </div>
        
 
-         <div className="forget-password">
-            Forget Password? <span>Click Here</span>
+         <div className="forget-password ">
+            Forget Password? <span className="text-primary" >Click Here</span>
           </div>
 
              
         <div className="submit-container">
-        <button className="submit-container btn btn-success btn-secondary submit" disabled={!buttonEnable} type="button" onClick={attemptLogin}>
-        Login
+        <button disabled={!buttonEnable}  className={"btn-login " +  (buttonEnable ? 'btn-enable' : '')  }  onClick={attemptLogin}>
+        Sign In
         </button>
           
           

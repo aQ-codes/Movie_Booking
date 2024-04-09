@@ -5,7 +5,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(1
 
 .loginsignup-page{
     background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(14,90,153,1) 100%); 
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(3,1,19,1) 48%, rgba(0,0,0,1) 98%);
     height:100vh;
     padding-top: 50px;
 
@@ -17,16 +17,27 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(1
 .loginsignup-container{
     display : flex; 
     flex-direction: column;
-    background: rgb(233, 206, 206);
+    /* background: rgb(3, 90, 152); */
+  background-color: rgba(8, 7, 7, 0.442);
     margin-top: 10px;
     padding-bottom: 30px;
     width: 600px;
     /* height:600px; */
     margin-top: 90px;
+    border-radius: 30px;
 
     
   
 }
+
+
+    .inp-drk:-webkit-autofill,
+    .inp-drk:-webkit-autofill:hover, 
+    .inp-drk:-webkit-autofill:focus, 
+    .inp-drk:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #212529 inset !important;
+}
+
 
 .header{
     display : flex; 
@@ -45,8 +56,8 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(1
 
 .underline{
     width:70px;
-    height:7px;
-    background-color: #3c009d;
+    height:2px;
+    background-color: #1a4fc1;
     border-radius: 10px;
 }
 
@@ -104,19 +115,38 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(1
     margin: 5px auto;
 
 } 
-.submit{
+
+.btn-login{
     display: flex;
-    background-color: #4c00b4;
     border-radius: 50px;
-    color: #fff;
-    font-weight: 700;
+    border:0px;
     width: 220px;
     height: 59px;
     font-size: 19px;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
+    /* opacity: 0; */
+    background-color: rgba(0, 0, 0, 0);
+    color:rgba(143, 143, 143, 0.149)
+
+
+    
+}
+
+.btn-enable{
+  
+    background-color: #0d6efd;
+    color: #fff;
     cursor: pointer;
+    opacity: .8;
 } 
+
+
+.btn-enable:hover{
+
+ opacity: 1;
+}
 
 .form-error{
     padding-left: 55px;

@@ -8,6 +8,13 @@ urlpatterns = [
     path('admin/login/', views.admin_login, name="admin-login"),
     path('admin/logout/', views.admin_logout, name="admin-login"),
 
+    #admin
+    path('customer/register/', views.customer_register, name="customer"),
+    path('customer/login/', views.customer_login, name="customer"),
+    path('customer/logout/', views.customer_logout, name="customer"),
+    path('customers/', views.customers, name="get-all-customers"),
+    path('customer/<int:pk>', views.customer, name="get-customer"),
+    
     #get movies based on status 
     path('movies/', views.list_movies, name="get-all-movies"), #also add movie
     path('running/', views.list_running, name="get-running"),
@@ -36,11 +43,7 @@ urlpatterns = [
     path('shows2/date/<int:pk>', views.show_detail_date),
 
 
-    path('customers/', views.customers, name="get-all-customers"),
-    path('customer/<int:pk>', views.customer, name="get-customer"),
-    path('customer/login/', views.customer_login, name="customer"),
-    path('customer/logout/', views.customer_logout, name="customer"),
-
+  
 
 
     path('screens/', views.list_screens, name="get-all-screens"),
