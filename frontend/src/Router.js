@@ -1,12 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import App from "./App";
 import Dashboard from "./components/admin/pages/DashboardPage";
 import Movies from './components/admin/pages/Movies'
 import AddMoviePage from "./components/admin/pages/AddMoviePage";
 import MovieDetail from "./components/admin/pages/MovieDetail";
 import EditMovieDetail from "./components/admin/pages/EditMovieDetail"
-import AddShowPage from "./components/admin/pages/AddShowPage";
 import Home from "./components/customer/pages/Home";
 import SelectShow from "./components/customer/pages/SelectShow";
 import CustomerLogin from "./components/customer/CustomerLogin";
@@ -21,7 +19,11 @@ import CompletedMoviesPage from "./components/admin/pages/CompletedMoviesPage";
 import DeleteMovie from "./components/admin/DeleteMovie";
 import DatesPage from "./components/admin/pages/DatesPage";
 import AllShowsPage from "./components/admin/pages/AllShowsPage";
-
+import ConfirmBooking from "./components/customer/ConfirmBooking";
+import AddShowPage from "./components/admin/pages/AddShowPage";
+import BookingInfo from "./components/customer/pages/BookingInfo";
+import EditShowPage from "./components/admin/pages/EditShowPage";
+import BookingSuccess from "./components/customer/pages/BookingSuccess";
 
 
 const router = createBrowserRouter([
@@ -33,7 +35,9 @@ const router = createBrowserRouter([
     { path: 'register', element: <CustomerRegister/> },
     { path: 'login', element: <CustomerLogin/> },
     { path: 'select/movie/:movId', element: <SelectShow/> },
-    { path: 'select/date/:dateId', element: <SelectShow/> },
+    // { path: 'select/show/:showId', element: <ConfirmBooking/> },
+    { path: 'booking', element: <BookingInfo/> },
+    { path: 'booking/success', element: <BookingSuccess/> },
     
 
 
@@ -56,14 +60,14 @@ const router = createBrowserRouter([
     { path: 'admin/movies/:movId/delete', element: <DeleteMovie/> },
     //-------------------all shows--------------------
     { path: 'admin/shows', element: <AllShowsPage/> },
-
-
-
-    //--------------------dates---------------------------
+    { path: 'admin/shows/add', element: <AddShowPage/> },
+    { path: 'admin/shows/:showId/edit', element: <EditShowPage/> },
+  
+    //--------------------dates----------------
     { path: 'admin/dates', element: <DatesPage/> },
 
-             //shows
-    { path: 'admin/shows/add', element: <AddShowPage/> },
+
+
     
     
     

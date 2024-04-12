@@ -10,8 +10,8 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(28,3,23,1) 50%, rgba(1
 /* height: 50px; */
 
 /* background:white */
-background:black;
-padding: 20px;
+background:rgb(0, 0, 0);
+padding: 10px;
 }
 
 .ourlogo{

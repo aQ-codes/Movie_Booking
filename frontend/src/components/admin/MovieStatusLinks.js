@@ -9,7 +9,7 @@ function MovieStatusLinks() {
             
             <Link to='/admin/movies/' href="#" class="link-dark movies-status-header border border-dark btn me-4 p-2 ">ALL MOVIES</Link>
 
-            <Link to='/admin/movies/running/' href="#" class="link-danger movies-status-header border border-danger btn  me-4  p-2 ">RUNNING MOVIES</Link>
+            <Link to='/admin/movies/running/' href="#" class="link-danger movies-status-header border border-danger btn  me-4  p-2 ">ACTIVE MOVIES</Link>
 
             <Link to='/admin/movies/paused/' href="#" class="link-secondary movies-status-header border border-secondary btn me-4 p-2">PAUSED MOVIES</Link>
 

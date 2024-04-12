@@ -1,6 +1,22 @@
 import React from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 
-function Seats() {
+
+function Seats(props) {
+//   console.log(props.selshow)
+    const navigate = useNavigate();
+
+  function setBookingInfo(){
+    // window.localStorage.setItem('selectedShow','hii')//
+    localStorage.setItem("showselected", JSON.stringify(props.selshow));
+    // console.log(props.selshow.id)
+    navigate("/booking")
+
+
+
+}
+
+ 
   return (
     <>
    
@@ -110,7 +126,7 @@ function Seats() {
         You have selected <span id="count">0</span> seats for a price of &#8377;<span id="total">0</span>
         </p>
 
-        <button className='col-6 btn btn-primary border-0 text-white p-2 mx-auto bk-txt'>Book Tickets</button>
+        <button className='col-6 btn btn-primary border-0 text-white p-2 mx-auto bk-txt' onClick={setBookingInfo}>Book Tickets</button>
 
 
         </div>

@@ -87,6 +87,7 @@ function AllShows() {
             <th>Time</th>
             <th>Screen</th>
             <th>Status</th>
+            <th>Price</th>
             <th colSpan='3'>Actions</th>
           </tr>
           </thead>

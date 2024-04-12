@@ -17,6 +17,8 @@ from django.contrib.auth.hashers import make_password
 
 from django.http import JsonResponse
 
+import razorpay
+
 from .serializers import *
 from .models import *
 from .models import Customer
@@ -90,12 +92,13 @@ def customer_login(request):
      password = request.data.get("password")
      user = authenticate(username=username, password=password)
      if user:
-        customer = Customer.objects.get(user_id=user.id)
-        if customer:
-           token, _ = Token.objects.get_or_create(user=user)
-           return Response({'token': token.key, 'user_id': user.id , 'email': user.username})
+        try:
+         customer = Customer.objects.get(user_id=user.id)
+        except:
+           return Response({'error': 'No Account Found.Please Sign Up First'})
         else:
-             return Response({'error': 'No Account Found.Please Sign Up First'})
+           token, _ = Token.objects.get_or_create(user=user)
+           return Response({'token': token.key, 'user_id': user.id , 'email': user.username,'customer_id':customer.id})
         
      else:
         return Response({'error': 'Incorrect Email or Passwod.Please Try Again'})
@@ -252,16 +255,6 @@ def list_dates(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
 #-------------------------screens----------------------------
 #get all screens    
 @api_view(["GET"])
@@ -284,8 +277,6 @@ def list_showtimes(request):
     serializer =ShowTimeSerializer(showtime, many = True)
     
     return Response(serializer.data)     
-
-
 
 
 
@@ -349,7 +340,7 @@ def show_detail2(request, pk):
 
 
 
-#active show details of particular movie - nested serializer
+#active show details of particular  movie - nested serializer
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -360,6 +351,23 @@ def show_detail_active(request, pk):
     shows=movie.show_set.filter(status__iexact='active')
     serializer = ShowSerializer2(shows,  many = True)
     return Response(serializer.data)   
+
+
+
+#active and Disabled show details of particular movie  - nested serializer
+@api_view(['GET'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+@permission_classes((AllowAny,))
+def show_detail_active_disabled(request, pk):
+    # product = get_object_or_404(, pk=pk)
+    movie = Movie.objects.get(id=pk)
+    shows=movie.show_set.filter(status__iexact='active') | movie.show_set.filter(status__iexact='disabled')
+    serializer = ShowSerializer2(shows,  many = True)
+    return Response(serializer.data)   
+
+
+
 
 
 
@@ -375,20 +383,34 @@ def show_detail_date(request, pk):
     return Response(serializer.data)   
 
 
+# -------------------------------booking----------------------
+#create new booking 
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def booking(request):     
 
+    if request.method == 'GET':
+       return Response('entered successfully')
 
+    #     # movies = Movie.objects.all()  
+    #     # serializer = MovieSerializer(movies, many = True)
+    #     # return Response(serializer.data)          
+    
+    if request.method == 'POST':
+        # return Response('entered successfully')
 
-
-
-
-
-
-
-
-
-
-
-
+        serializer =BookingSerializer(data=request.data)
+        if serializer.is_valid():
+            booking=serializer.save()
+            return Response({'booking_id':booking.id})
+        else:
+            return Response(serializer.errors)
+            serializer.save()
+            return Response('valid serializer')
+    #         return Response('Successfully created')
+    #     else:
+    #   else:      
+        return Response('entered successfully')
 
     
 @api_view(["GET"])
@@ -400,7 +422,7 @@ def list_bookings(request):
     return Response(serializer.data)  
 
 
-
+ 
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -413,28 +435,39 @@ def booking_detail(request, pk):
     return Response(serializer.data)
 
 
-
-
-@api_view(['GET','POST'])
+#create razorpay order
+@api_view(['POST'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
 @permission_classes((AllowAny,))
-def booking_temp(request):     
+def razorpay_order(request):
+    client = razorpay.Client(auth=("rzp_test_OZZv3kK0jph7j5", "6DWB2BLDg4ZBUZLuypoHFKuW"))
 
-    if request.method == 'GET':
-       return Response('entered successfully')
+    DATA = {
+        "amount":int( request.data.get('amount')),
+        "currency": "INR",
+        "receipt": request.data.get('order_id'),
+        "notes": {
+            "key1": "value3",
+            "key2": "value2"
+        }
+    }
+    res=client.order.create(data=DATA)
+    if res:
+        msg={
+            'bool':True,
+            'data':res
+        }
+    else:
+        msg={
+            'bool':False,
+            
+        }
+    return Response(msg)
 
-    #     # movies = Movie.objects.all()  
-    #     # serializer = MovieSerializer(movies, many = True)
-    #     # return Response(serializer.data)          
-    
-    if request.method == 'POST':
-        serializer =BookingTempSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response('valid serializer')
-    #         return Response('Successfull created')
-    #     else:
-    #         return Response(serializer.errors)
-        return Response('entered successfully')
+
+
+
 
 
 
@@ -490,38 +523,3 @@ def ticket_detail(request, pk):
 #     else:
 #         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
-
-
-# @api_view(['DELETE'])
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# @permission_classes((AllowAny,))
-# def delete(request, pk):
-#     try:
-#         product = Medicine.objects.get(pk=pk)
-#     except Medicine.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-
-#     product.delete()
-#     return Response("deleted successfully")
-
-     
-
-
-# @csrf_exempt
-# @api_view(["POST"])
-# @permission_classes((AllowAny,))
-# def login(request):
-#     username = request.data.get("username")
-#     password = request.data.get("password")
-#     if username is None or password is None:
-#         return Response({'error': 'Please provide both username and password'},
-#                         status=HTTP_400_BAD_REQUEST)
-#     user = authenticate(username=username, password=password)
-#     if not user:
-#         return Response({'error': 'Invalid Credentials'},
-#                         status=HTTP_404_NOT_FOUND)
-#     token, _ = Token.objects.get_or_create(user=user)
-#     return Response({'token': token.key, 'user_id': user.pk , 'email': user.email},status=HTTP_200_OK)
- 

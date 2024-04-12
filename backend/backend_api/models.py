@@ -66,8 +66,6 @@ class Show(models.Model):
     status = models.CharField(max_length = 200, null = True, choices = SHOW_STATUS, default='active')
     price = models.FloatField (null = True) 
  
-
-
     def __str__(self):  
         return self.movie.title
 

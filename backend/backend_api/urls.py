@@ -39,6 +39,7 @@ urlpatterns = [
     path('shows2/', views.list_shows2, name="get-all-shows"),
     #all show details of particular active movie - nested serializer
     path('shows2/<int:pk>/active', views.show_detail_active),
+    path('shows2/<int:pk>/active-disabled', views.show_detail_active_disabled),
     #get all shows by date nested serializer
     path('shows2/date/<int:pk>', views.show_detail_date),
 
@@ -49,15 +50,16 @@ urlpatterns = [
     path('screens/', views.list_screens, name="get-all-screens"),
 
     path('showtimes/', views.list_showtimes,name="get-all-slots"),
-
-
-
-
-
-    path('booking/temp/', views.booking_temp, name="book-temp"),
-
+# ---------------booking-------------------
+    #create new booking
+    path('booking/', views.booking),
+    #view all bookings
     path('bookings/', views.list_bookings, name="get-all-bookings"),
     path('bookings/<int:pk>', views.booking_detail, name="get-booking"),
+
+    #create razorpay order
+    path('booking/create-razorpay-order/', views.razorpay_order),
+
 
 
 

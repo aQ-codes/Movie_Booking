@@ -1,7 +1,15 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import *
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= User
+        fields = '__all__'
+
+
 class CustomerSerializer(serializers.ModelSerializer):
+    user=UserSerializer()
     class Meta:
         model = Customer
         fields = '__all__'
@@ -49,15 +57,17 @@ class ShowSerializer2(serializers.ModelSerializer):
         model = Show
         fields = '__all__'
 
-class BookingSerializer(serializers.ModelSerializer):
+class BookingSerializer2(serializers.ModelSerializer):
+    show=ShowSerializer2()
+    customer=CustomerSerializer()
     class Meta:
         model = Booking
         fields = '__all__'
 
 
-class BookingTempSerializer(serializers.ModelSerializer):
+class BookingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BookingTemp
+        model = Booking
         fields = '__all__'
 
 

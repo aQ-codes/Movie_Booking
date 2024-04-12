@@ -216,3 +216,8 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(5,4,64,1) 43%, rgba(44
   }
 }
 
+.carousel-container{
+  /* background-color: red; */
+  margin-top:80px;
+  height:300px;
+}

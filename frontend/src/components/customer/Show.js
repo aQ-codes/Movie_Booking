@@ -6,11 +6,11 @@ import {  useSelector } from "react-redux";
 // import checkAuth from "./auth/checkAuth"
 import './css/Show.css'
 
-import DateTag from './DateTag';
 import TimeTag from './TimeTag';
 
 
-function Show(props) {
+function Show({setShowSelected}) {
+
 
   const {movId} = useParams();
   let navigate = useNavigate();
@@ -21,16 +21,9 @@ function Show(props) {
   const [dates , setDates] = useState([])
   const[showsbymov,setShowsbyMovie]=useState([]);
 
-  const [booking, setBooking] =useState({
-    
-            "bk_id": 'demo100',
-            "date": '',
-            "time": '',
-         
-        }
-        );
 
-    const uniquedates = [...new Map(dates.map(item =>
+
+ const uniquedates = [...new Map(dates.map(item =>
         [item['id'], item])).values()];
         // console.log(uniquedates)
     
@@ -41,21 +34,11 @@ function Show(props) {
         // console.log (new Set(dates))
         // const unique = [...new Set(dates.map(item => item))]
         // console.log(movie)
-
   // console.log(booking)
+    // console.log(showsbymov)
+  // console.log(activedate)
 
-    
-    const inputHandler = (event) => {
-      setBooking({
-        ...booking,
-        [event.target.name]:event.target.value
-      })
-    
-    }
-    
-   
-
-     
+        
 
   async function fetchMovie(){
     axios.get('http://127.0.0.1:8000/api/movies/'+movId
@@ -71,15 +54,14 @@ function Show(props) {
 }
 
 
-
  function fetchShowsByDate(date_id){
   
   // console.log(date_id)
   setActiveDate(date_id)
   axios.get('http://127.0.0.1:8000/api/shows2/date/'+date_id
-// //     {
-// //       headers:{'Authorization':"Bearer "+ user.token}
-// //   }
+ //     {
+ //       headers:{'Authorization':"Bearer "+ user.token}
+ //   }
 ).then(response=>{
 
   setShowsbyMovie( response.data.filter(function (show) {
@@ -92,11 +74,6 @@ function Show(props) {
   })
 } //end of fetchShows
 
-
-
-
-  // console.log(showsbymov)
-  // console.log(activedate)
 
     function fetchShow(){   
       axios.get('http://127.0.0.1:8000/api/shows2/'+movId+'/active'
@@ -112,21 +89,6 @@ function Show(props) {
 
 
       }))//end of map
-
-
-      // setDates({
-      //   ...dates,
-      //   [item.date.id]:item.date.date
-             
-      //   }
-     
-          
-  
-  
-
-        // setShows(response.data)
-
-       
 
     })//end of then
 
@@ -145,38 +107,6 @@ function Show(props) {
   
       } //end of fetchShow function
   
-  
-
-
-
-  function submitHandler(event) {
-    event.preventDefault();
-
-        
-  axios.post('http://127.0.0.1:8000/api/booking/temp/',{
-//   {
-//     name: name,
-//     company: company,
-//     expiry_date : date
-// }
-bk_id: booking.bk_id,
-date: booking.date,
-time: booking.time,
-}
-  // //     {
-  // //       headers:{'Authorization':"Bearer "+ user.token}
-  // //   }
-    ).then(response=>{
-          // console.log(response.data)
-          // console.log(response.data)
-      })
-  //   }
-  //   else{
-      // navigate('/login');
-  //   }
-  }
-
-
   // console.log(allshows)
   // console.log(datestimes)
     
@@ -243,14 +173,11 @@ time: booking.time,
         </div>
         )}
         </div>
-        
-          
-       
-         
+               
 
           <div class="row mt-4  ps-4 ">
 
-          {activedate &&<TimeTag key={activedate} shows={showsbymov} /> }
+          {activedate &&<TimeTag key={activedate} shows={showsbymov} setShowSelected={setShowSelected} /> }
 
 
           </div> 
@@ -260,10 +187,6 @@ time: booking.time,
   
       
 </div> 
-{/* end of main column  */}
-   {/* ( <DateTag key={date.id} date={date} movid={movId} refresh={fetchShow}/>   ) */}
-
-
 
 </>
 

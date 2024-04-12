@@ -33,7 +33,8 @@ function CustomerLogin() {
             else{ 
                 var user = {
                     email:email,
-                    token:response.data.token
+                    token:response.data.token,
+                    customer_id:response.data.customer_id
                 }
                 dispatch(setUser(user));
                 navigate("/home")

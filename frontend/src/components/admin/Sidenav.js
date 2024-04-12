@@ -67,14 +67,6 @@ function Sidenav() {
                         <i className="lni lni-protection"></i>
                         <span>Bookings</span>
                     </a>
-                    <ul id="auth" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li className="sidebar-item">
-                            <a href="#" className="sidebar-link">Login</a>
-                        </li>
-                        <li className="sidebar-item">
-                            <a href="#" className="sidebar-link">Register</a>
-                        </li>
-                    </ul>
                 </li>
                 <li className="sidebar-item">
                     <a href="#" className="sidebar-link">

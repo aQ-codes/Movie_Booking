@@ -26,11 +26,12 @@ function ListShowItem(props) {
                     <td> {props.show.time.time} </td>
                     <td> {props.show.screen.name} </td>
                     <td> {props.show.status} </td>
+                    <td> {props.show.price} </td>
                     <td>
-                    <Link to={"/admin/movies/"+props.show.id+"/view"} className="btn btn-outline-info">VIEW</Link>
+                    <Link to={"/admin/movies/" + props.show.movie.id +"/view/" } className="btn btn-outline-info">MOVIE</Link>
                     </td>
                     <td>
-                    <Link to={"/admin/movies/"+props.show.id+"/edit"} className="btn btn-outline-warning">EDIT</Link>
+                    <Link to={"/admin/shows/"+props.show.id+"/edit"} className="btn btn-outline-warning">EDIT</Link>
                     </td> 
                     {/* <td>
                     <Link to={"/admin/movies/"+props.movie.id+"/delete"} className="btn btn-outline-danger">DELETE</Link>
