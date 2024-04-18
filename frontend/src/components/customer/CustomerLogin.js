@@ -34,10 +34,21 @@ function CustomerLogin() {
                 var user = {
                     email:email,
                     token:response.data.token,
-                    customer_id:response.data.customer_id
+                    customer_id:response.data.customer_id,
+                    name:response.data.name
                 }
                 dispatch(setUser(user));
+
+                var navloc1 = window.localStorage.getItem('navigate');
+                var navloc2 = JSON.parse(navloc1);
+                if (navloc2){
+                 window.localStorage.removeItem('navigate')
+                   navigate(navloc2)
+                }
+                else{
                 navigate("/home")
+               }
+                
             }
             console.log(response.data)
         

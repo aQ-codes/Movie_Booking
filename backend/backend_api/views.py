@@ -98,7 +98,7 @@ def customer_login(request):
            return Response({'error': 'No Account Found.Please Sign Up First'})
         else:
            token, _ = Token.objects.get_or_create(user=user)
-           return Response({'token': token.key, 'user_id': user.id , 'email': user.username,'customer_id':customer.id})
+           return Response({'token': token.key, 'user_id': user.id , 'email': user.username,'customer_id':customer.id ,'name':user.first_name})
         
      else:
         return Response({'error': 'Incorrect Email or Passwod.Please Try Again'})
@@ -383,7 +383,7 @@ def show_detail_date(request, pk):
     return Response(serializer.data)   
 
 
-# -------------------------------booking----------------------
+# -------------------------------booking----------------------------
 #create new booking 
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
@@ -397,7 +397,6 @@ def booking(request):
     #     # return Response(serializer.data)          
     
     if request.method == 'POST':
-        # return Response('entered successfully')
 
         serializer =BookingSerializer(data=request.data)
         if serializer.is_valid():
@@ -405,14 +404,22 @@ def booking(request):
             return Response({'booking_id':booking.id})
         else:
             return Response(serializer.errors)
-            serializer.save()
-            return Response('valid serializer')
-    #         return Response('Successfully created')
-    #     else:
-    #   else:      
-        return Response('entered successfully')
+        
+   
+#update booking
+@api_view(['PATCH'])
+@permission_classes((AllowAny,))
+def booking_update(request,pk):  
+        if request.method == 'PATCH':
+             booking = Booking.objects.get(id=pk)
+             serializer =BookingSerializer(instance=booking,data=request.data, partial =True)
+             if serializer.is_valid():
+                serializer.save()
+                return Response({'success':'updated successfully'})
+             else:
+                return Response(serializer.errors)
 
-    
+#get all bookings    
 @api_view(["GET"])
 @permission_classes((AllowAny,))
 def list_bookings(request):     
@@ -422,7 +429,16 @@ def list_bookings(request):
     return Response(serializer.data)  
 
 
- 
+#get all confirmed bookings of a customer
+@api_view(["GET"])
+@permission_classes((AllowAny,))
+def booking_customer(request,pk):     
+    bookings=Booking.objects.filter(status__iexact='confirmed') & Booking.objects.filter(customer_id=pk)
+    serializer = BookingSerializer2(bookings, many = True)
+    
+    return Response(serializer.data)  
+
+
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -433,6 +449,19 @@ def booking_detail(request, pk):
     serializer = BookingSerializer(bookings)
 
     return Response(serializer.data)
+
+
+#get all bookings of particular show
+@api_view(['GET'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+@permission_classes((AllowAny,))
+def booking_show(request, pk):
+    bookings = Booking.objects.filter(show=pk) 
+    serializer = BookingSerializer(bookings, many = True)
+
+    return Response(serializer.data)
+
 
 
 #create razorpay order
@@ -466,60 +495,4 @@ def razorpay_order(request):
     return Response(msg)
 
 
-
-
-
-
-
-
-
-
-
-@api_view(["GET"])
-@permission_classes((AllowAny,))
-def list_tickets(request):     
-    tickets =Ticket.objects.all()  
-    serializer = TicketSerializer(tickets, many = True)
-    
-    return Response(serializer.data)  
-
-
-@api_view(['GET'])
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-@permission_classes((AllowAny,))
-def ticket_detail(request, pk):
-    # product = get_object_or_404(, pk=pk)
-    ticket = Ticket.objects.get(id=pk)
-    serializer = TicketSerializer(ticket)
-
-    return Response(serializer.data)
-
-
-
-
-
-
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def create(request):
-#     form = MedicineForm(request.POST)
-#     if form.is_valid():
-#         medicine = form.save()
-#         return Response({'id': medicine.id}, status=status.HTTP_201_CREATED)
-#     return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# @api_view(['PUT'])
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def update(request, pk):
-#     product = get_object_or_404(Medicine, pk=pk)
-#     form = MedicineForm(request.data, instance=product)
-#     if form.is_valid():
-#         form.save()
-#         serializer = MedicineSerializer(product)
-#         return Response(serializer.data)
-#     else:
-#         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
     

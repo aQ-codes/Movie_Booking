@@ -131,7 +131,7 @@
 
 }
 
-.time-tag .time{
+.time{
   color: #1575cf;
 }
 
@@ -139,7 +139,6 @@
 .time-tag:hover{
   background-color: #1575cf;
   color:white
-
 
 
 }
@@ -151,4 +150,10 @@
 
 .h66{
   font-size: 10px;
+}
+
+.time-active{
+  background-color: #1575cf;
+
+
 }

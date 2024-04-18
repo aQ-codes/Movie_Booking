@@ -57,13 +57,6 @@ class ShowSerializer2(serializers.ModelSerializer):
         model = Show
         fields = '__all__'
 
-class BookingSerializer2(serializers.ModelSerializer):
-    show=ShowSerializer2()
-    customer=CustomerSerializer()
-    class Meta:
-        model = Booking
-        fields = '__all__'
-
 
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -71,10 +64,9 @@ class BookingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
-
-
-class TicketSerializer(serializers.ModelSerializer):
+class BookingSerializer2(serializers.ModelSerializer):
+    show=ShowSerializer2()
+    # customer=CustomerSerializer()
     class Meta:
-        model = Ticket
+        model = Booking
         fields = '__all__'

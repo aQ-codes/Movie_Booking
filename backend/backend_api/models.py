@@ -67,15 +67,17 @@ class Show(models.Model):
     price = models.FloatField (null = True) 
  
     def __str__(self):  
-        return self.movie.title
+        return str(self.id)
 
 
 class Booking(models.Model):
     bk_id = models.CharField(max_length = 200, blank=False, null = False)
     show = models.ForeignKey(Show, null=True, on_delete=models.SET_NULL)
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
+    seats=models.CharField(max_length = 200, null = True)
+    amount=models.FloatField (null = True) 
+    status=models.CharField(max_length = 200, null = True)
     date_created = models.DateTimeField(auto_now_add = True, null =True)  
-
 
     def __str__(self):  
         return self.bk_id
@@ -83,27 +85,3 @@ class Booking(models.Model):
 
 
 
-class BookingTemp(models.Model):
-    bk_id = models.CharField(max_length = 200, blank=False, null = False)
-    show = models.ForeignKey(Show, null=True, on_delete=models.SET_NULL)
-    screen = models.ForeignKey(Screen, null=True, on_delete=models.SET_NULL)
-    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
-    date = models.ForeignKey(ShowDay, null=True, on_delete=models.SET_NULL)
-    time = models.ForeignKey(ShowTime, null=True, on_delete=models.SET_NULL)
-    date_created = models.DateTimeField(auto_now_add = True, null =True)  
-
-
-    def __str__(self):  
-        return self.time 
-
-
-class Ticket(models.Model):
-    bk_id = models.ForeignKey(Booking, null=True, on_delete=models.SET_NULL)
-    # movie = models.ForeignKey(Movie, null=True, on_delete=models.SET_NULL)
-    seat_id = models.IntegerField (null = True)
-    seat_count = models.IntegerField (null = True)
-    price = models.FloatField(null=True)
-
-    
-    def __str__(self):  
-        return self.bk_id

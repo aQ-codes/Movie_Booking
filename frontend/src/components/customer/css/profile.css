@@ -1,0 +1,17 @@
+.profile-sec{
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(3,1,19,1) 48%, rgba(0,0,0,1) 98%);
+    height: 100vh;
+}
+
+.mybookings{
+    padding-top:3%;
+}
+
+.profile-info{
+   background-color: rgba(0, 0, 0, 0.416);
+}
+
+.bk-table{
+    background-color: black;
+}

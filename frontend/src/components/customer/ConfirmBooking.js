@@ -14,13 +14,26 @@ function ConfirmBooking() {
   const buttonEnable = (paymentmethod!='') 
   var show = window.localStorage.getItem('showselected');
   show = JSON.parse(show);
+  var booking = window.sessionStorage.getItem('initialbooking');
+  booking = JSON.parse(booking);
   var [order_id, setOrderId] = useState('');
 
   // console.log(buttonEnable)
   // console.log(paymentmethod)
   // console.log(show.price)
   // console.log(user.customer_id)
+
+  function generateString(length) {
+      const characters ='ABCDEFGHIJK01234LMNOPQRSTUVWXYZ56789';
+      let result = '';
+      const charactersLength = characters.length;
+      for ( let i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+  }
   
+
 function handleCheckbox(event){
 if (event.target.checked) {
   setPaymentMethod(event.target.value)
@@ -29,25 +42,31 @@ else
   setPaymentMethod('')
 }
 
+
 function payHandler(event){
   event.preventDefault();
-  axios.post('http://127.0.0.1:8000/api/booking/',{
-  bk_id: '125969',
-  show:show.id,
-  customer:user.customer_id
-  }).then(response=>{
+  let str = generateString(5)
+
+   let booking2 = {...booking,
+    "bk_id":'B'+str,
+    "customer": user.customer_id
+}
+
+  
+ console.log(booking2)
+  axios.post('http://127.0.0.1:8000/api/booking/',booking2).then(response=>{
   //  console.log(response.data)
    setOrderId(response.data.booking_id)
-
-
-   razorpayHandler()
+   sessionStorage.setItem("initialbooking", JSON.stringify(booking2));
+   let bk_id = response.data.booking_id
+   razorpayHandler(bk_id)
   })
 }
 
 
-function razorpayHandler(){
+function razorpayHandler(bk_id){
   var razorpayData = new FormData();
-  var order_amount =show.price * 100
+  var order_amount =booking.amount * 100
   razorpayData.append('amount',order_amount)
   razorpayData.append('order_id',order_id)
 // console.log(order_id)
@@ -62,11 +81,20 @@ function razorpayHandler(){
         key: "rzp_test_OZZv3kK0jph7j5",
         amount: order_amount,
         currency: "INR",
-        name: show.movie.title,
+        name: 'ViewBliss',
         description: "Test Transaction",
         image: "https://example.com/your_logo",
         order_id: response.data.data.id,
         handler: (res) => {
+          // console.log(order_id)
+          console.log(bk_id)
+          axios.patch('http://127.0.0.1:8000/api/booking/'+bk_id+'/update',
+          {
+            "status":'confirmed'
+          }).then(response=>{
+             console.log(response.data)
+            })
+
           navigate("/booking/success")
           
         },
@@ -88,6 +116,7 @@ function razorpayHandler(){
 
 }
 
+// console.log(order_id)
 
 
 
@@ -100,32 +129,36 @@ function razorpayHandler(){
 
 {/* ticket */}
 
-        <div class="ticket ">
+        <div class="ticket  ">
 
-          <div class="check check1">
+          <div class="check check1 col-5">
             <div class="big mb-2">
               {show.movie.title}<br/> 
             </div>
             <div>  {show.movie.language}</div>
-            <div class="number">1</div>
+            <div class="number">{booking.seats.split(',').length}</div>
             <div class="info mt-3">
-              <section>
+              <section className='mx-2'>
                 <div class="title mb-2 ">DATE</div>
                 <div>{show.date.date}</div>
               </section>
-              <section>
+              <section className='mx-2' >
                 <div class="title mb-2">TIME</div>
                 <div>{show.time.time}</div>
               </section>
-              <section>
+              <section className='mx-2'>
                 <div class="title mb-2">Screen</div>
                 <div>{show.screen.name}</div>
+              </section>
+              <section className='mx-2'>
+                <div class="title mb-2">Seats</div>
+                <div>{booking.seats}</div>
               </section>
             </div>
 
             <div>
             <div class="title mt-3 mb-2">Ticket Price :
-               <span class="text-danger">  &#8377; {show.price} </span>
+               <span class="text-danger text-bold">  &#8377; {booking.amount} </span>
             </div>              
             </div>
 
@@ -157,7 +190,7 @@ function razorpayHandler(){
 
         <div class="card-footer text-center">
           <button className='btn col-4 btn-danger ' disabled={!buttonEnable} onClick={payHandler}>
-          Pay  &#8377; {show.price}
+          Pay  &#8377; {booking.amount}
         </button>
         </div>
 

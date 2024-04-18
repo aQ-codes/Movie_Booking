@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import checkAuthAdmin from "./auth/checkAuthAdmin"
 
 
 
@@ -93,4 +94,4 @@ function Sidenav() {
   )
 }
 
-export default Sidenav
+export default checkAuthAdmin(Sidenav)

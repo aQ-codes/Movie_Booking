@@ -11,7 +11,6 @@ import  "./css/LoginSignup.css";
 import Navbar from "./Navbar";
 
 function CustomerRegister() {
-
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
   var [name, setName] = useState('');
@@ -31,7 +30,15 @@ function CustomerRegister() {
             setErrorMessage(response.data.error)
         }
         else{ 
-            navigate("/login")
+          var navloc1 = window.localStorage.getItem('navigate');
+          var navloc2 = JSON.parse(navloc1);
+          if (navloc2){
+             navigate(navloc2)
+          }
+          else{
+          navigate("/login")
+         }
+           
         }
         
     

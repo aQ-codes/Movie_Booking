@@ -17,7 +17,7 @@ function BookingSuccess() {
   return (
     <>
    
-    <div className='booking-page' >
+    <div className='booking-page ' >
     <Navbar/>
     <BkSuccess/>
     </div>

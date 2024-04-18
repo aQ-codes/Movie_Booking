@@ -13,7 +13,7 @@ function AdminHome() {
                         <h2 class="text-white ">Go to View Bliss Cinemas</h2>
                         <hr class="divider divider-light" />
                         {/* <p class="text-white-75 mb-4 custom1">Book Now Showing Movies...</p> */}
-                        <a class="btn btn-primary  btn-xl mt-4" href="#services">ViewBliss Cinemas</a>
+                        <Link to='/' class="btn btn-primary  btn-xl mt-4" href="#services">ViewBliss Cinemas</Link>
                     </div>
                 </div>
             </div>

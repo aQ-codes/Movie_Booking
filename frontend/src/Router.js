@@ -24,6 +24,7 @@ import AddShowPage from "./components/admin/pages/AddShowPage";
 import BookingInfo from "./components/customer/pages/BookingInfo";
 import EditShowPage from "./components/admin/pages/EditShowPage";
 import BookingSuccess from "./components/customer/pages/BookingSuccess";
+import Profile from "./components/customer/pages/Profile";
 
 
 const router = createBrowserRouter([
@@ -35,9 +36,9 @@ const router = createBrowserRouter([
     { path: 'register', element: <CustomerRegister/> },
     { path: 'login', element: <CustomerLogin/> },
     { path: 'select/movie/:movId', element: <SelectShow/> },
-    // { path: 'select/show/:showId', element: <ConfirmBooking/> },
     { path: 'booking', element: <BookingInfo/> },
     { path: 'booking/success', element: <BookingSuccess/> },
+    { path: 'profile', element: <Profile/> },
     
 
 

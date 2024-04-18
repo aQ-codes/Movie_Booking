@@ -11,32 +11,28 @@ import TimeTag from './TimeTag';
 
 function Show({setShowSelected}) {
 
-
-  const {movId} = useParams();
   let navigate = useNavigate();
-  const [activedate , setActiveDate] =useState('hi')
+  const {movId} = useParams();
+  const [activedate , setActiveDate] =useState('')
   var [movie, setMovie]=useState([]);
   let imgLink = 'http://127.0.0.1:8000' + movie.poster
   const [allshows, setShows] = useState([])
   const [dates , setDates] = useState([])
   const[showsbymov,setShowsbyMovie]=useState([]);
 
-
-
  const uniquedates = [...new Map(dates.map(item =>
         [item['id'], item])).values()];
-        // console.log(uniquedates)
+      
     
-
 //consoling the state variables
         // console.log(allshows)
         // console.log(dates)
         // console.log (new Set(dates))
-        // const unique = [...new Set(dates.map(item => item))]
         // console.log(movie)
-  // console.log(booking)
-    // console.log(showsbymov)
-  // console.log(activedate)
+        // console.log(booking)
+        // console.log(showsbymov)
+        // console.log(activedate)
+        // console.log(uniquedates)
 
         
 
@@ -53,28 +49,6 @@ function Show({setShowSelected}) {
     })
 }
 
-
- function fetchShowsByDate(date_id){
-  
-  // console.log(date_id)
-  setActiveDate(date_id)
-  axios.get('http://127.0.0.1:8000/api/shows2/date/'+date_id
- //     {
- //       headers:{'Authorization':"Bearer "+ user.token}
- //   }
-).then(response=>{
-
-  setShowsbyMovie( response.data.filter(function (show) {
-      return show.movie.id == movId
-    })  )
-      // setShows(response.data);
-
-      // console.log(response.data)     
-      
-  })
-} //end of fetchShows
-
-
     function fetchShow(){   
       axios.get('http://127.0.0.1:8000/api/shows2/'+movId+'/active'
     ).then(response=>{
@@ -85,8 +59,6 @@ function Show({setShowSelected}) {
 
   //  console.log(item.date)
       return item.date
-
-
 
       }))//end of map
 
@@ -105,19 +77,36 @@ function Show({setShowSelected}) {
     // )
   
   
-      } //end of fetchShow function
+      } //end of fetchShow 
+
+
+      function fetchShowsByDate(date_id){
   
-  // console.log(allshows)
-  // console.log(datestimes)
-    
+        // console.log(date_id)
+        setActiveDate(date_id)
+        axios.get('http://127.0.0.1:8000/api/shows2/date/'+date_id
+       //     {
+       //       headers:{'Authorization':"Bearer "+ user.token}
+       //   }
+      ).then(response=>{
+      
+        setShowsbyMovie( response.data.filter(function (show) {
+            return show.movie.id == movId
+          })  )
+            // setShows(response.data);
+      
+            // console.log(response.data)     
+            
+        })
+      } //end of fetchShowsByDate
+  
+
   useEffect(()=>{
        
     fetchShow()
     fetchMovie()
     // showDatesTimes()
     // console.log(allshows)
-
-    
   },[])
   
 
@@ -162,8 +151,7 @@ function Show({setShowSelected}) {
        
 
         {uniquedates.map((date)=>
-        <div class="col-3  ">
-        <div class=" justify-content-center "></div>
+        <div class="col-3 mt-3 ">
         <div class=" justify-content-center">
           <p value={date.id} className={"tag text-white date-tag " +  (activedate==date.id ? 'date-active' : '')  } onClick={() => {
         fetchShowsByDate(date.id);
@@ -172,12 +160,13 @@ function Show({setShowSelected}) {
         </div>
         </div>
         )}
+
         </div>
                
 
           <div class="row mt-4  ps-4 ">
 
-          {activedate &&<TimeTag key={activedate} shows={showsbymov} setShowSelected={setShowSelected} /> }
+          {activedate && <TimeTag key={activedate} shows={showsbymov} setShowSelected={setShowSelected} /> }
 
 
           </div> 

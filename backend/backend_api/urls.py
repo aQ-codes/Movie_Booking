@@ -50,21 +50,20 @@ urlpatterns = [
     path('screens/', views.list_screens, name="get-all-screens"),
 
     path('showtimes/', views.list_showtimes,name="get-all-slots"),
+
 # ---------------booking-------------------
     #create new booking
     path('booking/', views.booking),
+    #update booking
+    path('booking/<int:pk>/update', views.booking_update),
     #view all bookings
     path('bookings/', views.list_bookings, name="get-all-bookings"),
     path('bookings/<int:pk>', views.booking_detail, name="get-booking"),
-
+    #get bookings of particular show
+    path('bookings/show/<int:pk>', views.booking_show),
+    path('bookings/customer/<int:pk>', views.booking_customer),
     #create razorpay order
     path('booking/create-razorpay-order/', views.razorpay_order),
-
-
-
-
-    path('tickets/', views.list_tickets, name="get-all-tickets"),
-    path('tickets/<int:pk>', views.ticket_detail, name="get-ticket"),
 
 ]
 

@@ -8,8 +8,6 @@ admin.site.register(ShowTime)
 admin.site.register(Screen)
 admin.site.register(Show)
 admin.site.register(Booking)
-admin.site.register(BookingTemp)
-admin.site.register(Ticket)
 
 
 

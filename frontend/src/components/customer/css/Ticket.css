@@ -6,16 +6,9 @@
     
 }
 
-
-
-
-
-
 .booking{
-    margin-top: 120px;
+    margin-top: 100px;
 }
-
-
 
 .ticket {
     display: -webkit-box;
@@ -27,22 +20,20 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    width: 700px;
-    margin: 20px auto;
-    
 
   }
+
   .ticket .stub,
   .ticket .check {
     box-sizing: border-box;
   }
+
   .stub {
     background: #0b5180;
-    height: 250px;
-    width: 250px;
     color: white;
     padding: 20px;
     position: relative;
+    height: 250px;
   }
   .stub:before {
     content: '';
@@ -51,7 +42,6 @@
     right: 0;
     border-top: 20px solid #030112;
     border-left: 20px solid #ffffff;
-    width: 0;
   }
   .stub:after {
     content: '';
@@ -69,15 +59,17 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    height: 40px;
+    height: 30px;
     text-transform: uppercase;
+    font-size: 12px;
+
   }
   .stub .top .line {
     display: block;
     background: #fff;
     height: 40px;
-    width: 3px;
-    margin: 0 20px;
+    width: 2px;
+    margin: 0 10px;
   }
   .stub .top .num {
     font-size: 10px;
@@ -87,15 +79,15 @@
   }
   .stub .number {
     position: absolute;
-    left: 40px;
-    font-size: 150px;
+    font-size: 100px;
+    margin-left: 16%;
   }
   .stub .invite {
     position: absolute;
     left: 150px;
     bottom: 45px;
     color: #000;
-    width: 20%;
+    width: 30%;
   }
   .stub .invite:before {
     content: '';
@@ -105,13 +97,26 @@
     height: 3px;
     margin-bottom: 5px;
   }
+
+.welcome{
+  position: absolute;
+  font-size: 10px;
+  bottom:10px;
+  color: #000000;
+  font-style: italic;
+  font-weight: 700;
+
+}
+
+
   .check {
     background: #252525;
-    height: 250px;
-    width: 450px;
-    padding: 40px;
+    height: 25%;
+    padding: 30px;
     position: relative;
-    color:white
+    color:white;
+    height: 250px;
+
   }
   .check:before {
     content: '';
@@ -120,7 +125,6 @@
     left: 0;
     border-top: 20px solid #030112;
     border-right: 20px solid #fff;
-    width: 0;
   }
   .check:after {
     content: '';
@@ -129,7 +133,6 @@
     left: 0;
     border-bottom: 20px solid #030112;
     border-right: 20px solid #fff;
-    width: 0;
   }
   .check .big {
     font-size: 30px;
@@ -153,11 +156,8 @@
             justify-content: flex-start;
     font-size: 12px;
     margin-top: 20px;
-    width: 100%;
   }
-  .check .info section {
-    margin-right: 50px;
-  }
+
   .check .info section:before {
     content: '';
     background: #ef5658;
@@ -183,8 +183,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    border-top: 20px solid #2a2a2a;
-    border-right: 20px solid #2a2a2a;
+    border-top: 20px solid #252525;
+    border-right: 20px solid #252525;
     width: 0;
   }
   .check1:after {
@@ -192,7 +192,23 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    border-bottom: 20px solid #2a2a2a;
-    border-right: 20px solid #2e2d2d;
+    border-bottom: 20px solid #252525;
+    border-right: 20px solid #252525;
     width: 0;
+  }
+  .success{
+    color: rgb(24, 174, 255);
+  }
+
+  .text-bold{
+    font-weight: 600;
+   
+  }
+
+  .col-seat{
+   
+  }
+
+  .ovflw{
+    word-wrap: break-word
   }

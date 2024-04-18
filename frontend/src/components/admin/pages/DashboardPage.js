@@ -9,6 +9,7 @@ import ListAnalytics from '../ListAnalytics';
 import "../css/body.css";
 
 function DashboardPage() {
+  
   return (
     <> 
     <Navbar/>

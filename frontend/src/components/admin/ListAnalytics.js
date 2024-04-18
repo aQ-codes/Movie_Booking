@@ -1,4 +1,5 @@
 import React from 'react'
+import checkAuthAdmin from "./auth/checkAuthAdmin"
 
 function ListAnalytics() {
   return (
@@ -111,4 +112,4 @@ function ListAnalytics() {
   )
 }
 
-export default ListAnalytics
+export default checkAuthAdmin(ListAnalytics)
