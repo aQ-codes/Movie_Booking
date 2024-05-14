@@ -4,6 +4,7 @@ import { Link ,NavLink} from 'react-router-dom'
 import { useSelector , useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+
 import './css/navbar.css'
 
 function Navbar() {
@@ -19,7 +20,7 @@ function Navbar() {
 
       <div class="container ">
 
-  <Link to='/admin/' className="navbar-brand " href="#">
+  <Link to='/' className="navbar-brand ">
     
        <span className='outer-brand pacifico-regular'>View</span><span className='outer-brand inner-brand pacifico-regular'>Bliss </span>
   </Link>
@@ -32,7 +33,7 @@ function Navbar() {
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-2">
 
             <li class="nav-item">
-            <NavLink to={"/home"} className={
+            <NavLink to={"/"} className={
                 "nav-link navboy-item " + ((status) => (status.isActive ? "active" : ""))
               }  >Now Showing</NavLink>
             

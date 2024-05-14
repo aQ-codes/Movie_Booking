@@ -22,8 +22,7 @@ function AdminLogin() {
           function attemptLogin(event) {
               event.preventDefault();
                
-              axios.post('http://127.0.0.1:8000/api/admin/login/',{
-
+              axios.post('http://127.0.0.1:8000/api/token/',{
                   username:username,
                   password:password
               }).then(response=>{
@@ -33,7 +32,8 @@ function AdminLogin() {
                   else{ 
                       var admin = {
                           username:username,
-                          token:response.data.token
+                          access_token:response.data.access,
+                          refresh_token:response.data.refresh
                       }
                       dispatch(setAdmin(admin));
                       console.log(admin)

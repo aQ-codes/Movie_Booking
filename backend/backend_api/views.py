@@ -33,11 +33,11 @@ def admin_login(request):
      username = request.data.get("username")
      password = request.data.get("password")
      user = authenticate(username=username, password=password)
-     if user:
+     if user.id==5:
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key, 'user_id': user.id , })
      else:
-      return Response({'error': 'Invalid Credentials'})
+      return Response({'error': 'Invalid Credentials !!'})
      
 #admin logout   
 @csrf_exempt
@@ -63,7 +63,6 @@ def customer_register(request):
             password=hashed_pass
         )
         if user:
-            msg='user created'
             customer = Customer.objects.create(
                 user=user
             )
@@ -81,12 +80,6 @@ def customer_register(request):
 @api_view(['POST'])
 @permission_classes((AllowAny,))
 def customer_login(request):  
-    #  msg = {
-    #      'bool':True,
-    #      'post':request.data.get('email')
-
-    #  }
-    #  return Response(msg)
 
      username = request.data.get("email")
      password = request.data.get("password")
@@ -156,12 +149,25 @@ def list_movies(request):
         else:
             return Response(serializer.errors)
 
-#get running movies
+#get running movies for customer
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def list_running(request):       
+   shows = Show.objects.filter(status__iexact='active').exclude(date__isnull=True).exclude(time__isnull=True)
+   lst=[];
+   for s in shows:
+       lst.append(s.movie.id)
+   movies = Movie.objects.filter(id__in=lst) 
+   serializer = MovieSerializer(movies, many = True)
+   return Response(serializer.data)     
+
+
+#get active movies for admin
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def list_active(request):       
    
-   movies = Movie.objects.filter(status__iexact='running') 
+   movies = Movie.objects.filter(status__iexact='active') 
    serializer = MovieSerializer(movies, many = True)
    return Response(serializer.data)     
 
@@ -203,8 +209,7 @@ def completed_movies(request):
 # @permission_classes([IsAuthenticated])
 @permission_classes((AllowAny,))
 def movie_detail(request, pk):
-    # movie = get_object_or_404(Movie, pk=pk)
-    # movie = Movie.objects.get(id=pk)
+
     if request.method == 'GET':
         movie = Movie.objects.get(id=pk)
         serializer = MovieSerializer(movie)
@@ -217,17 +222,25 @@ def movie_detail(request, pk):
          return Response("Deleted successfully")
     
 #edit particular movie
-@api_view(["PUT"])
+@api_view(["PUT","PATCH"])
 @permission_classes((AllowAny,))
 def movie_detail_edit(request,pk):  
+    # if request.method == 'PATCH':
+    #          movie = Movie.objects.get(id=pk)
+    #          serializer = MovieSerializer(instance=movie,data=request.data,partial =True)
+    #          if serializer.is_valid():
+    #            serializer.save()
+    #            return Response('Successfully updated')
+    #          else:
+    #           return Response({'error':"Failed To Update"})
+         
     movie = Movie.objects.get(id=pk)
-    serializer = MovieSerializer(movie,data=request.data)
+    serializer = MovieSerializer(instance=movie,data=request.data)
     if serializer.is_valid():
             serializer.save()
             return Response('Successfully updated')
     else:
-            return Response("Failed To Update")
-
+            return Response({'error':"Failed To Update"})
 
 
 
@@ -302,17 +315,38 @@ def list_shows(request):
             return Response(serializer.errors)
 
 
-##get a particular show detail - no nested serializer
+#get a particular show detail - with nested serializer
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
 @permission_classes((AllowAny,))
-def show_detail(request, pk):
+def show_details(request, pk):
     # product = get_object_or_404(, pk=pk)
     show = Show.objects.get(id=pk)
-    serializer = ShowSerializer(show)
-
+    serializer = ShowSerializer2(show)
     return Response(serializer.data)
+
+
+#get a particular show detail - no nested serializer
+@api_view(['GET','PATCH'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+@permission_classes((AllowAny,))
+def show_detail(request, pk):
+    if request.method == 'GET':
+    # product = get_object_or_404(, pk=pk)
+      show = Show.objects.get(id=pk)
+      serializer = ShowSerializer(show)
+      return Response(serializer.data)
+    
+    if request.method == 'PATCH':
+             show = Show.objects.get(id=pk)
+             serializer =ShowSerializer(instance=show,data=request.data, partial =True)
+             if serializer.is_valid():
+                serializer.save()
+                return Response({'success':'updated successfully'})
+             else:
+                return Response(serializer.errors)
 
 
 #list all shows with nested serializer
@@ -325,7 +359,8 @@ def list_shows2(request):
         
         return Response(serializer.data)
 
-#show details of marticular movie - nested serializer
+
+#show details of particular movie - nested serializer
 @api_view(['GET'])
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -336,8 +371,6 @@ def show_detail2(request, pk):
     shows = movie.show_set.all()
     serializer = ShowSerializer2(shows,  many = True)
     return Response(serializer.data)   
-
-
 
 
 #active show details of particular  movie - nested serializer
@@ -351,7 +384,6 @@ def show_detail_active(request, pk):
     shows=movie.show_set.filter(status__iexact='active')
     serializer = ShowSerializer2(shows,  many = True)
     return Response(serializer.data)   
-
 
 
 #active and Disabled show details of particular movie  - nested serializer
@@ -424,7 +456,7 @@ def booking_update(request,pk):
 @permission_classes((AllowAny,))
 def list_bookings(request):     
     bookings =Booking.objects.all()  
-    serializer = BookingSerializer(bookings, many = True)
+    serializer = BookingSerializer2(bookings, many = True)
     
     return Response(serializer.data)  
 

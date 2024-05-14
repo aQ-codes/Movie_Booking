@@ -168,7 +168,7 @@ console.log(seatselected)
         <div className='row  text-center p-4'>
         {/* <h4>Showing Seats For The Show DragonBallSuper on  16-08-2024</h4> */}
         <p class="text  ">
-        You have selected <span id="count">{count}</span> seats for a price of &#8377;<span id="total">{count * props.selshow.price}</span>
+        You have selected <span id="count">{count}</span> seats for a price of &#8377;<span id="total">{props.selshow && count * props.selshow.price} </span>
         </p>
 
         <button className='col-6 btn btn-primary border-0 text-white p-2 mx-auto bk-txt' onClick={setBooking} disabled={!bookEnable}>Book Tickets</button>

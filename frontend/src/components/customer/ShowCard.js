@@ -2,6 +2,7 @@ import React from 'react'
 import broly from "../Assets/broly.jpg";
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+
 function ShowCard(props) {
 
   const title = props.movie.title
@@ -33,9 +34,9 @@ function ShowCard(props) {
       <ul>
 
       <Link to={{ pathname: "/select/movie/"+props.movie.id, state:  dataToPass }}>
-      <li>
-      <i class="fa fa-ticket"></i>
-      <i class="material-icons">GET YOUR TICKETS</i>
+      <li className='bg-inf p-3'>
+      <i class="fa fa-ticket"></i>&ensp;
+      <i class="material-icons">GET TICKETS</i>
   
       </li>
 

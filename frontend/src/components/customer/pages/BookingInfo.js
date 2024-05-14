@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Navbar from '../Navbar';
 import ConfirmBooking from '../ConfirmBooking';
 import '../css/Ticket.css'
-
+import checkAuth from '../auth/checkAuth';
 
 
 
@@ -28,4 +28,4 @@ function BookingInfo() {
   )
 }
 
-export default BookingInfo
+export default checkAuth(BookingInfo)

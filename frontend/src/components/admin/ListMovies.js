@@ -13,44 +13,15 @@ function ListMovies() {
 
     // var user = useSelector(store=>store.auth.user);
     var [movies, setMovies]=useState([]);
-    // var [filteredMeds, setFilteredMeds] = useState([]);
-    // const [SearchTerm, setSearchTerm] = useState("");
     let navigate = useNavigate();
-    // var [errorMessage, setErrorMessage] = useState('');
-
-    // const handleSearchInputChange = (event) => {
-    //   event.preventDefault();
-    //   setSearchTerm(event.target.value);
-    // };
-  
-    // const handleSearch = (event) => {
-    //   event.preventDefault();
-    //   if (SearchTerm.trim() === "") {
-    //     // If the search input is empty, reset the filteredPosts state.
-    //     setFilteredMeds(meds);
-    //   } else {
-    //     // Otherwise, filter the posts based on the search term.
-    //     var filteredItems = meds.filter((item) =>
-    //       item.name.toLowerCase().includes(SearchTerm.toLowerCase())
-    //     );
-    //     setFilteredMeds(filteredItems);
-    //   }
-    // };
-
-
 
 
 
     async function fetchMovies(){
-        // const response = await fetch("http://127.0.0.1:8000/api/movies/");
-        // const movies = await response.json();
-        // console.log(movies);
-    //   if (user){
-        
         axios.get('http://127.0.0.1:8000/api/movies/'
-    // //     {
-    // //       headers:{'Authorization':"Bearer "+ user.token}
-    // //   }
+     //     {
+    //       headers:{'Authorization':"Bearer "+ user.token}
+     //   }
       ).then(response=>{
             setMovies(response.data);
             // console.log(response.data)

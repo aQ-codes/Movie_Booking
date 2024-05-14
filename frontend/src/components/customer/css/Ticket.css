@@ -1,7 +1,7 @@
 .booking-page{
     background: rgb(0,0,0);
     background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(3,1,19,1) 48%, rgba(0,0,0,1) 98%);
-    height: 83vh; 
+    height: 85vh; 
     /* background-color: aliceblue; */
     
 }
@@ -205,9 +205,6 @@
    
   }
 
-  .col-seat{
-   
-  }
 
   .ovflw{
     word-wrap: break-word

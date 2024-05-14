@@ -43,7 +43,7 @@ function RunningMovies() {
      // console.log(movies);
  //   if (user){
      
-     axios.get('http://127.0.0.1:8000/api/running'
+     axios.get('http://127.0.0.1:8000/api/movies/active'
  // //     {
  // //       headers:{'Authorization':"Bearer "+ user.token}
  // //   }

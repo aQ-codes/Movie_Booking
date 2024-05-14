@@ -25,20 +25,25 @@ import BookingInfo from "./components/customer/pages/BookingInfo";
 import EditShowPage from "./components/admin/pages/EditShowPage";
 import BookingSuccess from "./components/customer/pages/BookingSuccess";
 import Profile from "./components/customer/pages/Profile";
+import Ticket from "./components/customer/Ticket";
+import Upcomingpage from "./components/customer/pages/Upcomingpage";
+import BookingsPage from "./components/admin/pages/BookingsPage";
 
 
 const router = createBrowserRouter([
 
           //customer routes
 
-    { path: '', element: <App/> },
-    { path: 'home', element: <Home/> },
+    // { path: '', element: <App/> },
+    { path: '', element: <Home/> },
+    { path: 'upcoming', element: <Upcomingpage/> },
     { path: 'register', element: <CustomerRegister/> },
     { path: 'login', element: <CustomerLogin/> },
     { path: 'select/movie/:movId', element: <SelectShow/> },
     { path: 'booking', element: <BookingInfo/> },
     { path: 'booking/success', element: <BookingSuccess/> },
     { path: 'profile', element: <Profile/> },
+    { path: 'ticket', element: <Ticket/> },
     
 
 
@@ -66,6 +71,9 @@ const router = createBrowserRouter([
   
     //--------------------dates----------------
     { path: 'admin/dates', element: <DatesPage/> },
+
+        //--------------------bookings----------------
+        { path: 'admin/bookings', element: <BookingsPage/> },
 
 
 

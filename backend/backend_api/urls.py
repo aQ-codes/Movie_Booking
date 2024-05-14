@@ -18,6 +18,7 @@ urlpatterns = [
     #get movies based on status 
     path('movies/', views.list_movies, name="get-all-movies"), #also add movie
     path('running/', views.list_running, name="get-running"),
+    path('movies/active/', views.list_active, name="get-running"),
     path('movies/paused', views.paused_movies, name="get-all-movies"),
     path('movies/upcoming', views.upcoming_movies, name="get-all-movies"),
     path('movies/completed', views.completed_movies, name="get-all-movies"),
@@ -27,14 +28,15 @@ urlpatterns = [
     path('movies/<int:pk>/delete', views.movie_detail, name="edit-movie"),
     path('movies/<int:pk>/edit/', views.movie_detail_edit, name="edit-movie"),
     
-    #date
-    path('dates/', views.list_dates,name="get-all-dates"),
 
     #show
     #get all shows and add new show
     path('shows/', views.list_shows, name="get-all-shows"),
     #show details of particular show without nested serializer
     path('shows/<int:pk>', views.show_detail, name="get-show"),
+    #show details of particular show with nested serializer
+     path('show/<int:pk>', views.show_details, name="get-show"),
+
    #list all shows with nested serializer
     path('shows2/', views.list_shows2, name="get-all-shows"),
     #all show details of particular active movie - nested serializer
@@ -43,12 +45,14 @@ urlpatterns = [
     #get all shows by date nested serializer
     path('shows2/date/<int:pk>', views.show_detail_date),
 
-
   
 
 
+    #date
+    path('dates/', views.list_dates,name="get-all-dates"),
+    #screen
     path('screens/', views.list_screens, name="get-all-screens"),
-
+    #time
     path('showtimes/', views.list_showtimes,name="get-all-slots"),
 
 # ---------------booking-------------------

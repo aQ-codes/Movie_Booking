@@ -6,7 +6,7 @@ import checkAuthAdmin from "./auth/checkAuthAdmin"
 function Sidenav() {
   return (
     // <div className ="wrapper">
-        <aside id="sidebar" className="col-2">
+        <aside id="sidebar" className="col-2 bg-primar">
             <div className="d-flex">
                 <button className="toggle-btn" type="button">
                     <i className="lni lni-grid-alt"></i>
@@ -38,6 +38,7 @@ function Sidenav() {
 
                         <span>Shows</span>
                 </Link>
+                </li>
                    
                 <Link to="/admin/dates/" className="sidebar-link" >
 
@@ -61,14 +62,17 @@ function Sidenav() {
                             </ul>
                         </li>
                     </ul> */}
+
+               <li className="sidebar-item">
+                <Link to="/admin/bookings" className="sidebar-link" >
+                <i className="lni lni-protection"></i>
+
+
+                <span>Bookings</span>
+
+                </Link>
                 </li>
-                <li className="sidebar-item">
-                    <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i className="lni lni-protection"></i>
-                        <span>Bookings</span>
-                    </a>
-                </li>
+
                 <li className="sidebar-item">
                     <a href="#" className="sidebar-link">
                         <i className="lni lni-popup"></i>

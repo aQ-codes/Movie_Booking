@@ -9,9 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function EditMovie() {
-    const images ='../../../../backend'
     let navigate = useNavigate();
-    
     // var user = useSelector(store=>store.auth.user);
     const [successmsg, setSuccessMsg] = useState('')
     const [errormsg, setErrorMsg] = useState('')
@@ -22,24 +20,25 @@ function EditMovie() {
         "description": "",
         "duration": "",
         "status": "",
-        "poster": ""}) //movie image we upload
-     const [img, setImg] = useState([]) //movie image from server
+        "poster": ""}) 
+    const [img, setImg] = useState(null) //movie image from server
+    const [img2, setImg2] = useState(null) //movie image from server
+
 
     useEffect(()=>{
         axios.get('http://127.0.0.1:8000/api/movies/'+movId).then(response=>{
             setMovieData(response.data)
-            console.log(response.data)
+            // console.log(response.data)
             let imgLink = 'http://127.0.0.1:8000' + response.data.poster
             // console.log(imgLink)
             setImg(imgLink)
+            setImg2( response.data.poster)
         })
     },[movId]);
 
     // console.log(img)
     // console.log(moviedata.poster)
-    // console.log(moviedata)
-
-
+    console.log(moviedata)
 
 const inputHandler = (event) => {
   setMovieData({
@@ -66,13 +65,14 @@ const fileHandler = (event) => {
   formdata.append('duration',moviedata.duration)
   formdata.append('status',moviedata.status)
   if(moviedata.poster==''){
-    formdata.append('poster',img)}
+    formdata.append('poster',img2)}
   else{
-    formdata.append('poster',moviedata.poster)}
-    for (var pair of formdata.entries()) {
-      console.log(pair[0]+ ' - ' + pair[1]); 
+    formdata.append('poster',moviedata.poster)
   }
-    axios.put('http://127.0.0.1:8000/api/movies/'+movId+'/edit/',formdata
+  //   for (var pair of formdata.entries()) {
+  //     console.log(pair[0]+ ' - ' + pair[1]); 
+  // }
+    axios.patch('http://127.0.0.1:8000/api/movies/'+movId+'/edit/',formdata
  ).then(response=>{
 
     console.log(response.data)
@@ -80,10 +80,12 @@ const fileHandler = (event) => {
     setErrorMsg(response.statusText)
     setSuccessMsg('')
     }
-    else{
-    setErrorMsg('')
-    setSuccessMsg(response.data)
+    else if(response.data.error){
+    setErrorMsg(response.data.error)
+    setSuccessMsg('')}
 
+   else{
+    setSuccessMsg(response.data)
    }
   }) // navigate('/medicines')
   .catch(error=>{
@@ -106,7 +108,7 @@ const fileHandler = (event) => {
       
 <div className="card  col-md-6 mx-auto mt-4">
 
-  <div className="card-header bg-warning ">
+  <div className="card-header bg-dark text-white ">
     EDIT MOVIE
   </div>
 
@@ -161,7 +163,7 @@ const fileHandler = (event) => {
     <select id="product_category" name="status" className="form-control"  onChange={inputHandler}>
     <option value={moviedata.status} default>{moviedata.status}</option>
       <option value="Upcoming">Upcoming</option>
-      <option value="Running">Running</option>
+      <option value="Active">Active</option>
       <option value="Paused">Paused</option>
       <option value="Completed">Completed</option>
     </select>
@@ -174,14 +176,14 @@ const fileHandler = (event) => {
     <input id="filebutton" name="poster" className="input-file " type="file" onChange={fileHandler}/>
   </div>
  
-  {/* <img src={img}  height="150" width="100" className="thumbnail"></img> */}
+  <img src={img}  height="150" width="100" className="thumbnail"></img>
  
 </div>
  
 
 <div className="form-group mt-4">
   <div className="col text-center">
-    <button id="singlebutton" name="singlebutton" className="btn btn-warning col-md-4 "  onClick={submitHandler}>Update </button>
+    <button id="singlebutton" name="singlebutton" className="btn btn-primary col-md-4 "  onClick={submitHandler}>Update </button>
   </div>
   </div>
 

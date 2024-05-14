@@ -7,7 +7,7 @@ export const checkGuest = (Component) =>{
         var user = useSelector(store=>store.auth.user);
         var navigate = useNavigate();
         useEffect(()=>{
-            if(user){
+            if(!user){
                 navigate('/');
             }
         },[user])

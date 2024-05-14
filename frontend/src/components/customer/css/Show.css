@@ -108,15 +108,25 @@
 
 .date-tag{
   background-color: #000000;
-  border: solid  #585656;
+  border: solid  #1a4395;
+  font-size: smaller;
+  font-weight: bold;
+  /* border: solid  #ff0000; */
   
-
-
 }
 
 .date-tag:hover{
-  /* background-color: #f21111; */
+  cursor: pointer;
+  background-color: #225bcb;
   border: solid  #225bcb;
+
+}
+
+.date-active{
+  background-color: #225bcb;
+  border: solid  #225bcb;
+  font-size: smaller;
+  font-weight: bold;
 
 
 }
@@ -143,17 +153,14 @@
 
 }
 
-.date-active{
-  border: solid  #225bcb;
+.time-active{
+  background-color: #1575cf;
+  color:white
+
 
 }
+
 
 .h66{
   font-size: 10px;
-}
-
-.time-active{
-  background-color: #1575cf;
-
-
 }

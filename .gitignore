@@ -1,6 +1,7 @@
 movie_booking_env
 info.rtf
-
+users.txt
+static
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

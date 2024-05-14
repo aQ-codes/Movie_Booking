@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Navbar'
 import '../css/profile.css'
 import MyBookings from '../MyBookings'
+import checkAuth from '../auth/checkAuth';
 
 function Profile() {
 
@@ -18,6 +19,6 @@ function Profile() {
   )
 }
 
-export default Profile
+export default checkAuth(Profile)
 
 

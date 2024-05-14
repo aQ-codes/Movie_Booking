@@ -19,7 +19,7 @@ function Show({setShowSelected}) {
   const [allshows, setShows] = useState([])
   const [dates , setDates] = useState([])
   const[showsbymov,setShowsbyMovie]=useState([]);
-
+  var d_array;
  const uniquedates = [...new Map(dates.map(item =>
         [item['id'], item])).values()];
       
@@ -100,6 +100,17 @@ function Show({setShowSelected}) {
         })
       } //end of fetchShowsByDate
   
+function formatDate(date){
+// console.log(date)
+// const d = new Date("2022-03-25")
+let date_split = date.date.split('-')
+const d = new Date(`${date_split[2]}-${date_split[1]}-${date_split[0]}`)
+ d_array = d.toString().split(' ')
+// console.log(d_array)
+// return d_array
+}
+
+
 
   useEffect(()=>{
        
@@ -147,18 +158,23 @@ function Show({setShowSelected}) {
 {/* date row */}
 
       
-        <div class="row  ps-5 ">
+        <div class="row bg-warnin ps-5 ">
        
 
         {uniquedates.map((date)=>
-        <div class="col-3 mt-3 ">
-        <div class=" justify-content-center">
-          <p value={date.id} className={"tag text-white date-tag " +  (activedate==date.id ? 'date-active' : '')  } onClick={() => {
+        <>
+        {formatDate(date) }
+        {/* <div class="col-1 mt-3 "> */}
+        {/* <div class=" justify-content-center"> */}
+          <div value={date.id} className={"col-1 me-5 p-2 text-center text-white date-tag " +  (activedate==date.id ? 'date-active' : '')  } onClick={() => {
         fetchShowsByDate(date.id);
-       }} >     {date.date}</p>
+       }} >   {d_array[0]} <br/>  {d_array[2]}<br/>  {d_array[1]}</div>  
 
-        </div>
-        </div>
+       {/* {date.date} */}
+
+        {/* </div> */}
+        {/* </div> */}
+        </>
         )}
 
         </div>

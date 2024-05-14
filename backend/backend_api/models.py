@@ -7,15 +7,13 @@ class Customer(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
    
     def __str__(self):  
-         return self.user.username
+         return self.user.username 
     
 
-   
-    
 class Movie(models.Model):
     STATUS = (
         ('Upcoming', 'Upcoming'),
-        ('Running', 'Running'),
+        ('Active', 'Active'),
         ('Paused', 'Paused'),
         ('Completed', 'Completed')
         )

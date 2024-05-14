@@ -117,7 +117,7 @@ event.preventDefault();
 
 <div className="card col-md-6 mx-auto mt-4">
 
-  <div className="card-header">
+  <div className="card-header bg-dark text-white">
     ADD NEW SHOW
   </div>
 
@@ -183,7 +183,7 @@ event.preventDefault();
       <option value="">--Choose Status--</option>
       <option value="enabled">Active</option>
       <option value="disabled">Disable</option>
-      <option value="disabled">Finished</option>
+      <option value="finished">Finished</option>
     </select>
   </div>
 </div>

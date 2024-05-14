@@ -21,7 +21,7 @@ const [moviedata, setMovieData] = useState({
         "language": "",
         "description": "",
         "duration": "",
-        "status": "Upcoming",
+        "status": "",
         "poster": ""
       });
 
@@ -111,7 +111,7 @@ function Redirect(event) {
 <>
 <div className="card  col-md-6 mx-auto mt-4">
 
-  <div className="card-header bg-success">
+  <div className="card-header bg-dark text-white">
     ADD MOVIE
   </div>
 
@@ -166,7 +166,7 @@ function Redirect(event) {
     <select id="product_categorie" name="status" className="form-control"  onChange={inputHandler}>
     <option value="Upcoming" default>--Select-Status--</option>
       <option value="Upcoming">Upcoming</option>
-      <option value="Running">Running</option>
+      <option value="Active">Active</option>
       <option value="Paused">Paused</option>
       <option value="Completed">Completed</option>
     </select>
@@ -203,7 +203,7 @@ function Redirect(event) {
   
    <div className='text-success text-center'><h3>Added New Movie</h3></div>
    <div class="modal-footer my-4 card-footer  mx-auto">
-            <button type="button" class="btn btn-success  " onClick={Redirect} >OK</button>
+            <button type="button" class="btn btn-primary  " onClick={Redirect} >OK</button>
           </div> 
  </Popup>
 

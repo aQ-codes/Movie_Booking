@@ -1,0 +1,219 @@
+.ticket-popup{
+    background-color: transparent;
+    position:fixed;
+    top:0;
+    /* display:flex; */
+    /* align-items: center; */
+    /* width: 100; */
+    height: 100vh;
+    /* border:0; */
+    /* padding-top:25vh; */
+    /* padding-left:30vh; */
+   
+}
+.tkt-row{
+    margin-top: 200px;
+}
+
+.ticketp {
+
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: center;
+       -ms-flex-pack: center;
+           justify-content: center;
+   -webkit-box-align: center;
+       -ms-flex-align: center;
+           align-items: center;
+
+ }
+
+ .ticketp .stubp,
+ .ticketp .checkp {
+   box-sizing: border-box;
+ }
+
+ .stubp {
+   background: #de0101;
+   color: white;
+   padding: 20px;
+   position: relative;
+   height: 250px;
+ }
+ .stubp:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   right: 0;
+   border-top: 20px solid #030112;
+   border-left: 20px solid #ffffff;
+ }
+ .stubp:after {
+   content: '';
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   border-bottom: 20px solid #030112;
+   border-left: 20px solid #ffffff;
+   width: 0;
+ }
+ .stubp .topp {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-align: center;
+       -ms-flex-align: center;
+           align-items: center;
+   height: 30px;
+   text-transform: uppercase;
+   font-size: 12px;
+
+ }
+ .stubp .topp .linep {
+   display: block;
+   background: #fff;
+   height: 40px;
+   width: 2px;
+   margin: 0 10px;
+ }
+ .stubp .topp .nump {
+   font-size: 10px;
+ }
+ .stubp .topp .nump span {
+   color: #000;
+ }
+ .stubp .numberp {
+   position: absolute;
+   font-size: 100px;
+   margin-left: 16%;
+ }
+ .stubp .invitep {
+   position: absolute;
+   left: 150px;
+   bottom: 45px;
+   color: #000;
+   width: 30%;
+ }
+ .stubp .invitep:before {
+   content: '';
+   background: #fff;
+   display: block;
+   width: 40px;
+   height: 3px;
+   margin-bottom: 5px;
+ }
+
+.welcomep{
+ position: absolute;
+ font-size: 10px;
+ bottom:10px;
+ color: #000000;
+ font-style: italic;
+ font-weight: 700;
+
+}
+
+
+ .checkp {
+   background: #252525;
+   height: 25%;
+   padding: 30px;
+   position: relative;
+   color:white;
+   height: 250px;
+
+ }
+ .checkp:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   border-top: 20px solid #030112;
+   border-right: 20px solid #fff;
+ }
+ .checkp:after {
+   content: '';
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   border-bottom: 20px solid #030112;
+   border-right: 20px solid #fff;
+ }
+ .checkp .bigp {
+   font-size: 30px;
+   font-weight: 900;
+   line-height: .8em;
+   color: #ef5658;
+ }
+ .checkp .numberp {
+   position: absolute;
+   top: 50px;
+   right: 50px;
+   color: #ef5658;
+   font-size: 40px;
+ }
+ .checkp .infop {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: start;
+       -ms-flex-pack: start;
+           justify-content: flex-start;
+   font-size: 12px;
+   margin-top: 20px;
+ }
+
+ .checkp .infop section:before {
+   content: '';
+   background: #ef5658;
+   display: block;
+   width: 60px;
+   height: 3px;
+   margin:auto;
+   margin-bottom: 5px;
+ }
+ .checkp .infop section .titlep {
+   font-size: 10px;
+   text-transform: uppercase;
+   color: aqua;
+ }
+ 
+.titlep{
+ color: aqua;
+
+}
+
+ 
+ .check1:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   border-top: 20px solid #252525;
+   border-right: 20px solid #252525;
+   width: 0;
+ }
+ .check1:after {
+   content: '';
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   border-bottom: 20px solid #252525;
+   border-right: 20px solid #252525;
+   width: 0;
+ }
+ .successp{
+   color: rgb(24, 174, 255);
+ }
+
+ .text-boldp{
+   font-weight: 600;
+  
+ }
+
+
+
+ .ovflwp{
+   word-wrap: break-word
+ }

@@ -8,7 +8,7 @@ import {  useSelector } from "react-redux";
 // import checkAuth from "./auth/checkAuth"
 
 function AllShows() {
-   // var user = useSelector(store=>store.auth.user);
+   var admin = useSelector(store=>store.auth.admin);
   var [allShows, setallShows]=useState([]);
   // var [filteredMeds, setFilteredMeds] = useState([]);
   // const [SearchTerm, setSearchTerm] = useState("");
@@ -44,10 +44,10 @@ function AllShows() {
       // console.log(movies);
   //   if (user){
       
-      axios.get('http://127.0.0.1:8000/api/shows2/'
-  // //     {
-  // //       headers:{'Authorization':"Bearer "+ user.token}
-  // //   }
+      axios.get('http://127.0.0.1:8000/api/shows2/',
+      {
+        headers:{'Authorization':"JWT "+ admin.access_token}
+     }
     ).then(response=>{
           setallShows(response.data);
           console.log(response.data)

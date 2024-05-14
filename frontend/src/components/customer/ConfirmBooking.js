@@ -123,13 +123,13 @@ function razorpayHandler(bk_id){
 
 
 
-  return (
+  if (show) return (
     <>
     <div className='booking'>     
 
-{/* ticket */}
+{/* ticket details */}
 
-        <div class="ticket  ">
+        <div class="ticket row bg-primar">
 
           <div class="check check1 col-5">
             <div class="big mb-2">
@@ -173,6 +173,7 @@ function razorpayHandler(bk_id){
         </div>
 
 {/* choose payment method */}
+<div className='row'>
         <div className='col mt-5'>
 
         <div class="card bg-dark text-white col-5 mx-auto">
@@ -200,7 +201,7 @@ function razorpayHandler(bk_id){
         </div>
  {/* end of payment method col  */}
 
-  
+ </div>
     </div>
     </>
   )

@@ -18,6 +18,7 @@ export const authSlice = createSlice({
             state.user = null;
             window.localStorage.removeItem('user')
         },
+        
         setUserFromLocalStorage: (state)=>{
             var user = window.localStorage.getItem('user');
             if(user){

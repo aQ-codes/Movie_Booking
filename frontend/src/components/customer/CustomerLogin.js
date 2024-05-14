@@ -9,8 +9,8 @@ import password_icon from "../Assets/password.png";
 import person_icon from "../Assets/person.png";
 import  "./css/LoginSignup.css";
 import Navbar from "./Navbar";
-
 // import checkGuest from "./checkGuest";
+import checkAuth from './auth/checkAuth';
 
 
 function CustomerLogin() {
@@ -46,7 +46,7 @@ function CustomerLogin() {
                    navigate(navloc2)
                 }
                 else{
-                navigate("/home")
+                navigate("/")
                }
                 
             }
@@ -118,4 +118,4 @@ function CustomerLogin() {
   );
 }
 
-export default CustomerLogin;
+export default checkAuth(CustomerLogin);

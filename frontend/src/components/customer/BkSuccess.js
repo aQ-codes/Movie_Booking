@@ -3,11 +3,15 @@ import useRazorpay from "react-razorpay";
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
-import QRCode from "react-qr-code";
-import emailjs from '@emailjs/browser';
 import './css/Ticket.css'
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+
+import QRCode from "react-qr-code";
+// import emailjs from '@emailjs/browser';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 function BkSuccess() {
   
@@ -18,13 +22,22 @@ function BkSuccess() {
   show = JSON.parse(show);
   var booking = window.sessionStorage.getItem('initialbooking');
   booking = JSON.parse(booking);
-
+  var qrvalue = booking.bk_id + ' ' + show
+  const pdfRef = useRef()
   
   useEffect(()=>{
-   
-    // sentMail()
     
-},[user])
+    var bk_email = window.sessionStorage.getItem('email');
+    if (bk_email){
+    bk_email = JSON.parse(bk_email);
+      if (bk_email!=booking.bk_id){
+         sentMail()
+       }
+      }
+    else{
+      sentMail()
+     }
+},[])
 
 
 function sentMail(){
@@ -47,8 +60,24 @@ function sentMail(){
     }).catch(error=>{
       console.log(error)
     })
+    sessionStorage.setItem("email", JSON.stringify(booking.bk_id));
 
-
+  }
+  const downloadPDF = () => {
+    const input = pdfRef.current;
+    html2canvas(input).then((canvas)=>{
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4', true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth , pdfHeight / imgHeight)
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth*ratio, imgHeight*ratio);
+      pdf.save('ticket.pdf');
+    })
   }
 
   return (
@@ -57,10 +86,10 @@ function sentMail(){
 {/* heading */}
       <div className='p-4 bg-inf' > 
         <h1 className='text-center  success'>Your Ticket is Ready !!! &#128525;</h1>
-        <h5 className='text-center  text-secondary'>Download  from your profile</h5>
+        <h5 className='text-center  text-secondary'>Download from your profile</h5>
        </div>
 {/* ticket */}  
-      <div class="ticket m-4 mx-auto col-8">
+      <div class="ticket m-4  mx-auto col-8" ref={pdfRef}>
      {/* ticket left side  */}
           <div class="stub col-3">
 
@@ -74,7 +103,7 @@ function sentMail(){
 
             <div class="number bg-warnin"> <QRCode
              size={120}
-              value='Download from profile to get information' />
+              value={qrvalue} />
             </div>
 
             <div className='row welcome'>
@@ -114,25 +143,21 @@ function sentMail(){
                   <div className='ovflw ' >{booking.seats}</div>
                 </section>
 
-
               </div>
 
-       
                 <div>
                 <div class="title mt-3 mb-2">Payment :
                   <span class="text-bold text-info">  &#8377; {booking.amount} </span>
                 </div>              
                 </div>
-
-            
           
           </div> 
           {/* end of right side ticket  */}
         </div>
        {/* end of ticket  */}
-       <div class="dwnld">
-       <Link to={{ pathname: "/select/movie/" }}>
-                <i class="fa fa-download" aria-hidden="true"></i>
+
+       <div class="dwnld text-center">
+       <Link className='' onClick={downloadPDF}> DOWNLOAD&ensp;<i class="fa fa-download" aria-hidden="true"></i> 
                 </Link>
         </div>
 
